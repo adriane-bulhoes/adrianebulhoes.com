@@ -1,0 +1,102 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { fullDate } from '../../lib/format-date';
+
+export const getStaticPaths = (async () => {
+  const notes = await getCollection('fieldnotes');
+  return notes.map((note) => ({ params: { slug: note.id }, props: { note } }));
+}) satisfies GetStaticPaths;
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const { title, date, location, tags, excerpt } = note.data;
+---
+
+<BaseLayout title={`${title} — Field Notes`} description={excerpt ?? title}>
+  <article class="note-article">
+    <a href="/fieldnotes" class="back-link">Field Notes</a>
+    <div class="article-meta">
+      <span class="article-date">{fullDate(date)}</span>
+      <span class="article-loc">{location}</span>
+    </div>
+    <h1 class="article-title">{title}</h1>
+    {tags.length > 0 && (
+      <div class="article-tags">{tags.map((t) => <span class="article-tag">{t}</span>)}</div>
+    )}
+    <div class="article-body">
+      <Content />
+    </div>
+    <div class="article-footer">
+      <a href="/fieldnotes" class="clink">Todas as entradas</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .note-article {
+    position: relative;
+    z-index: 10;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 10rem 1.5rem 6rem;
+  }
+  .back-link {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--glacier-deep);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .back-link::before { content: '← '; }
+  .back-link:hover { color: var(--glacier-pale); }
+
+  .article-meta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin: 2.5rem 0 1rem; }
+  .article-date { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--glacier-deep); }
+  .article-loc { font-size: 0.58rem; letter-spacing: 0.1em; color: var(--text-dim); display: flex; align-items: center; gap: 0.4rem; }
+  .article-loc::before { content: '◎'; font-size: 0.5rem; color: var(--lava-glow); }
+
+  .article-title {
+    font-family: var(--ff-serif);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--glacier-pale);
+    margin-bottom: 1.5rem;
+  }
+  .article-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .article-tag { font-size: 0.52rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lava-glow); }
+
+  /* Rendered Markdown body */
+  .article-body :global(p) {
+    font-size: 1rem;
+    line-height: 1.95;
+    color: #6a9aaa;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+  .article-body :global(em) { font-family: var(--ff-serif); font-style: italic; color: var(--text-mid); font-size: 1.12rem; }
+  .article-body :global(strong) { color: var(--glacier-pale); font-weight: 400; }
+  .article-body :global(h2),
+  .article-body :global(h3) { font-family: var(--ff-serif); font-weight: 400; color: var(--glacier-pale); margin: 2.5rem 0 1rem; line-height: 1.2; }
+  .article-body :global(h2) { font-size: 1.7rem; }
+  .article-body :global(h3) { font-size: 1.3rem; }
+  .article-body :global(a) { color: var(--glacier-mid); text-underline-offset: 3px; }
+  .article-body :global(blockquote) {
+    font-family: var(--ff-serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--text-mid);
+    line-height: 1.4;
+    border-left: 1px solid var(--glacier-deep);
+    padding-left: 1.5rem;
+    margin: 2.5rem 0;
+  }
+  .article-body :global(img) { width: 100%; height: auto; border-radius: 3px; margin: 2rem 0; }
+  .article-body :global(ul),
+  .article-body :global(ol) { color: #6a9aaa; line-height: 1.9; margin: 0 0 1.5rem 1.2rem; font-weight: 300; }
+
+  .article-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(200, 232, 240, 0.08); }
+</style>
