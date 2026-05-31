@@ -1,0 +1,31 @@
+---
+/**
+ * Fixed top navigation: logo, page links (with active state), and the PT/EN
+ * toggle island. Active link derived from the current path.
+ */
+import LangToggle from './LangToggle.tsx';
+
+const links = [
+  { href: '/sobre', label: 'Sobre' },
+  { href: '/projetos', label: 'Projetos' },
+  { href: '/fieldnotes', label: 'Field Notes' },
+  { href: '/contato', label: 'Contacto' },
+];
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+
+<nav>
+  <a href="/" class="nav-logo">Adriane S<span>.</span> Bulhões</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>{l.label}</a>
+        </li>
+      ))}
+    </ul>
+    <LangToggle client:idle />
+  </div>
+</nav>
