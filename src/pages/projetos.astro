@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StratumDivider from '../components/StratumDivider.astro';
+---
+
+<BaseLayout title="Projetos — Adriane Santana Bulhões" description="Dois territórios, uma mesma pergunta sobre pressão e resistência dos ecossistemas costeiros.">
+  <!-- HERO -->
+  <section class="proj-hero">
+    <div class="glow" style="width:650px;height:650px;background:rgba(184,146,42,.07);top:-150px;right:-200px;animation-delay:-5s;"></div>
+    <div class="glow" style="width:400px;height:400px;background:rgba(74,154,176,.07);bottom:0;left:5%;animation-delay:-12s;"></div>
+    <div class="page-hero-eyebrow">Investigação</div>
+    <h1 class="page-hero-title">Projetos<br /><em>em curso</em></h1>
+    <p class="page-hero-sub">Dois territórios. Uma mesma pergunta sobre pressão, perda e resistência dos ecossistemas costeiros.</p>
+  </section>
+
+  <StratumDivider fill="#111618" />
+
+  <!-- Populated from the `projetos` content collection in Phase 5 (T030). -->
+  <section class="proj-shell">
+    <div class="section-label">Projetos <span>— investigação</span></div>
+    <p class="proj-shell-note">Conteúdo a ser carregado a partir da coleção de projetos.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .proj-hero {
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+  }
+  .proj-shell { padding: 7rem 3rem; position: relative; z-index: 10; }
+  .proj-shell-note { color: var(--text-dim); font-size: 0.85rem; font-weight: 300; }
+</style>
