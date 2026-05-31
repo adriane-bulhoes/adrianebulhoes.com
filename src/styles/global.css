@@ -1,0 +1,367 @@
+/* =========================================================================
+   Adriane Santana Bulhões — global stylesheet
+   The "basalt / glacier / lava" geology theme. Imported once by BaseLayout.
+
+   Defines the design tokens (:root custom properties) and shared base/chrome
+   styles (reset, body, nav, footer, reveal, dividers, clink, responsive,
+   reduced-motion). Page- and component-specific layout lives in each .astro
+   file's scoped <style> block (Constitution III).
+   ========================================================================= */
+
+/* ---- Design tokens ---------------------------------------------------- */
+:root {
+  /* Rock / dark grounds (darkest -> lightest) */
+  --basalt:      #0a0e0f;
+  --obsidian:    #111618;
+  --deep-rock:   #162020;
+  --rock-mid:    #1e2e2e;
+
+  /* Glacier (cool teal/blue accents) */
+  --glacier-deep: #4a9ab0;
+  --glacier-mid:  #89c4d4;
+  --glacier-pale: #c8e8f0;
+
+  /* Lava (warm accents) */
+  --lava-bright: #e0712f;
+  --lava-glow:   #c05a20;
+
+  /* Mineral / sand */
+  --mineral-pale: #d8c79e;
+
+  /* Text */
+  --text-bright: #e8f6fa;
+  --text-mid:    #8fb0bd;
+  --text-dim:    #5a8593;
+  --text-ghost:  #3a5560;
+
+  /* Type families (loaded via <link> in each page <head>) */
+  --ff-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --ff-mono:  'DM Mono', ui-monospace, 'SFMono-Regular', monospace;
+}
+
+/* ---- Reset / base ----------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--basalt);
+  color: var(--text-mid);
+  font-family: var(--ff-mono);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+a { color: inherit; }
+img, svg { max-width: 100%; }
+button { font-family: inherit; }
+
+/* Content sits above the fixed background layers */
+main {
+  position: relative;
+  z-index: 10;
+}
+
+/* ---- Custom cursor (driven by JS in each page) ------------------------ */
+#cur-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--glacier-mid);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+#cur-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--glacier-deep);
+  border-radius: 50%;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 9998;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+/* ---- Fixed background layers ------------------------------------------ */
+/* Animated wave canvas (drawn by JS) */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Faint tectonic line-art overlay */
+.tectonic {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.45;
+  pointer-events: none;
+}
+.tectonic svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Film-grain / noise overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Soft drifting glow blobs (size/colour/position set inline per page) */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  animation: floatDrift 22s ease-in-out infinite;
+}
+
+/* ---- Navigation ------------------------------------------------------- */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.4rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10, 14, 15, 0.9), transparent);
+  pointer-events: none;
+}
+
+.nav-logo {
+  position: relative;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--glacier-pale);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--lava-glow); }
+
+.nav-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover { color: var(--glacier-pale); }
+
+.lang-toggle {
+  display: flex;
+  gap: 0.3rem;
+}
+.lang-toggle button {
+  background: transparent;
+  border: 1px solid rgba(143, 176, 189, 0.25);
+  color: var(--text-dim);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  padding: 0.32em 0.62em;
+  border-radius: 2px;
+  cursor: none;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.lang-toggle button.active {
+  background: var(--glacier-deep);
+  color: var(--basalt);
+  border-color: var(--glacier-deep);
+}
+
+/* ---- Shared section bits ---------------------------------------------- */
+.section-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--glacier-deep);
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-label span {
+  color: var(--text-dim);
+  letter-spacing: 0.18em;
+}
+
+/* Strata dividers between sections */
+.stratum-divider {
+  position: relative;
+  z-index: 10;
+  line-height: 0;
+}
+.stratum-divider svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Contact-style link buttons */
+.clink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  text-decoration: none;
+  padding: 0.9em 1.7em;
+  border: 1px solid rgba(143, 176, 189, 0.28);
+  border-radius: 2px;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.clink:hover {
+  background: var(--glacier-deep);
+  color: var(--basalt);
+  border-color: var(--glacier-deep);
+}
+.clink-primary {
+  background: var(--glacier-deep);
+  color: var(--basalt);
+  border-color: var(--glacier-deep);
+}
+.clink-primary:hover {
+  background: var(--glacier-mid);
+  border-color: var(--glacier-mid);
+}
+
+/* ---- Footer ----------------------------------------------------------- */
+footer {
+  position: relative;
+  z-index: 10;
+  background: var(--deep-rock);
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(143, 176, 189, 0.08);
+}
+footer p {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.footer-element {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--glacier-mid);
+}
+
+/* ---- Reveal-on-scroll (JS toggles .on) -------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.on {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Keyframes -------------------------------------------------------- */
+/* Used by hero entrance animations declared inline (animation: fadeUp ...) */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(30px, -20px) scale(1.05); }
+  66%      { transform: translate(-20px, 15px) scale(0.97); }
+}
+
+/* ---- Responsive ------------------------------------------------------- */
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.8rem; }
+}
+
+@media (max-width: 640px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 1rem 1.2rem;
+  }
+  .nav-right { gap: 1rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.58rem; }
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Touch devices: drop the custom cursor so the native one works */
+@media (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+  #cur-dot, #cur-ring { display: none; }
+  .lang-toggle button { cursor: pointer; }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
