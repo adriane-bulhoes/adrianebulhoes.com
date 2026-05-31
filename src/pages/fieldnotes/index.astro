@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StratumDivider from '../../components/StratumDivider.astro';
+import FieldNoteCard from '../../components/FieldNoteCard.astro';
+
+const notes = (
+  await getCollection('fieldnotes', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Visual-only filter chips (functional filtering is a future enhancement).
+const filters = ['Todas', 'Geologia', 'Vulcanismo', 'Costeiro', 'Manguezal', 'Islândia', 'Nova Zelândia', 'Brasil'];
+---
+
+<BaseLayout title="Field Notes — Adriane Santana Bulhões" description="Observações, perguntas e fragmentos do campo — entre a maré baixa e o satélite.">
+  <!-- HERO -->
+  <section class="fn-hero">
+    <div class="glow" style="width:600px;height:600px;background:rgba(42,90,106,.1);top:-180px;right:-180px;animation-delay:-6s;"></div>
+    <div class="glow" style="width:350px;height:350px;background:rgba(192,90,32,.06);bottom:-50px;left:8%;animation-delay:-14s;"></div>
+    <div class="page-hero-eyebrow">Diário de campo</div>
+    <h1 class="page-hero-title">Field<br /><em>Notes</em></h1>
+    <p class="page-hero-sub">Observações, perguntas e fragmentos do campo — entre a maré baixa e o satélite.</p>
+  </section>
+
+  <StratumDivider fill="#111618" />
+
+  <!-- INTRO -->
+  <div class="fn-intro">
+    <p class="reveal">"Field Notes não é um blog. É um diário de campo — entradas curtas escritas com lama nas botas e perguntas na cabeça. Um lugar entre a observação científica e a memória pessoal."</p>
+  </div>
+
+  <!-- FILTER BAR (visual) -->
+  <div class="filter-bar">
+    {filters.map((f, i) => (
+      <button class:list={['filter-btn', { on: i === 0 }]} type="button">{f}</button>
+    ))}
+  </div>
+
+  <!-- NOTES -->
+  <section class="notes-section">
+    {notes.length === 0 ? (
+      <p class="notes-empty">Ainda não há entradas — em breve.</p>
+    ) : (
+      <div class="notes-grid">
+        {notes.map((note, i) => <FieldNoteCard note={note} featured={i === 0} index={i} />)}
+      </div>
+    )}
+  </section>
+
+  <StratumDivider fill="#162020" bg="#111618" />
+
+  <!-- WRITING CTA -->
+  <div class="writing-cta reveal">
+    <p>Mais entradas a caminho</p>
+    <h3>"Cada lugar geológico que visito deixa uma pergunta. Esta é a página onde as pergunto em voz alta."</h3>
+  </div>
+</BaseLayout>
+
+<style>
+  .fn-hero {
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .fn-intro {
+    background: var(--obsidian);
+    padding: 4rem 3rem;
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid rgba(200, 232, 240, 0.05);
+  }
+  .fn-intro p {
+    font-family: var(--ff-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+    max-width: 620px;
+  }
+
+  .filter-bar {
+    background: var(--obsidian);
+    padding: 1.5rem 3rem;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(200, 232, 240, 0.05);
+  }
+  .filter-btn {
+    font-family: var(--ff-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.35em 0.9em;
+    border: 1px solid rgba(200, 232, 240, 0.15);
+    color: var(--text-dim);
+    background: transparent;
+    transition: all 0.25s;
+    border-radius: 2px;
+  }
+  .filter-btn.on { border-color: var(--glacier-deep); color: var(--glacier-mid); background: rgba(74, 154, 176, 0.08); }
+
+  .notes-section { background: var(--obsidian); padding: 5rem 3rem 7rem; position: relative; z-index: 10; }
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(200, 232, 240, 0.05);
+    border: 1px solid rgba(200, 232, 240, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .notes-empty { color: var(--text-dim); font-style: italic; font-family: var(--ff-serif); font-size: 1.2rem; }
+
+  .writing-cta { background: var(--deep-rock); padding: 5rem 3rem; position: relative; z-index: 10; text-align: center; }
+  .writing-cta p { font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--lava-glow); margin-bottom: 1rem; }
+  .writing-cta h3 { font-family: var(--ff-serif); font-style: italic; font-size: 1.6rem; font-weight: 300; color: var(--text-mid); max-width: 500px; margin: 0 auto; line-height: 1.4; }
+
+  @media (max-width: 900px) {
+    .notes-grid { grid-template-columns: 1fr; }
+    .filter-bar { padding: 1.2rem 1.5rem; }
+  }
+</style>
