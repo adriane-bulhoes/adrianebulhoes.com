@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 — Página não encontrada" description="A página que procura não foi encontrada.">
+  <section class="notfound">
+    <div class="page-hero-eyebrow">Erro 404</div>
+    <h1 class="page-hero-title">Camada <em>não encontrada</em></h1>
+    <p class="page-hero-sub">A página que procura não existe — ou foi erodida pelo tempo geológico. Talvez tenha mudado de coordenadas.</p>
+    <div class="notfound-actions">
+      <a href="/" class="clink clink-primary">Voltar ao início</a>
+      <a href="/fieldnotes" class="clink">Ler as Field Notes</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 9rem 3rem 6rem;
+    position: relative;
+    z-index: 10;
+  }
+  .notfound-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 2.2rem; }
+  @media (max-width: 900px) {
+    .notfound { padding: 8rem 1.5rem 5rem; }
+  }
+</style>
