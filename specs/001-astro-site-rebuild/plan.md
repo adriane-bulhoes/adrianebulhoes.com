@@ -11,13 +11,13 @@ layer composed by a `BaseLayout`. The five pages are ported to `.astro` at visua
 Field Notes and Projetos become Markdown **Content Collections** with Zod-validated
 frontmatter, rendered statically via `getStaticPaths`. Interactivity (animated wave canvas,
 custom cursor, scroll reveals, PT/EN toggle) ships only as React/Astro islands. The output is
-a static site deployed on Vercel and served at adrianebulhoes.com.
+a static site deployed on Netlify and served at adrianebulhoes.com.
 
 ## Technical Context
 
 **Language/Version**: TypeScript (strict); Node LTS
 **Framework**: Astro 6.4.x (static output)
-**Integrations**: `@astrojs/react` 5.x (islands), `@astrojs/vercel` 10.x (adapter)
+**Integrations**: `@astrojs/react` 5.x (islands); no platform adapter — static output to `dist/` (Netlify adapter added in spec 002)
 **Dependencies**: react 19.2, react-dom 19.2; no UI/CSS framework
 **Content**: Astro Content Collections via `glob` loader; config in `src/content.config.ts`
 **Styling**: Hand-authored CSS + `:root` design tokens (`src/styles/global.css`) + scoped
@@ -25,7 +25,7 @@ component `<style>`. No Tailwind (Constitution III).
 **Fonts**: Cormorant Garamond, DM Mono, Syne via Google Fonts `display=swap`
 **Testing/Verification**: `npm run build` (type + schema gate); `astro check`; preview server
 + screenshot parity at 1280px and 375px; Lighthouse on `/` and an article page.
-**Target Platform**: Static site on Vercel; responsive desktop-first
+**Target Platform**: Static site on Netlify; responsive desktop-first
 **Project Type**: Static content site (low logic)
 **Performance Goals**: Lighthouse ≥ 95 all categories; zero JS on pages with no island
 **Constraints**: PT-only content; EN-ready structure; WCAG AA; reduced-motion respected
@@ -101,6 +101,6 @@ reference/
 3. **Static pages** — Home, Sobre, Contato, 404 (US1, MVP).
 4. **Field Notes** — collection + listing + article + home teaser (US2).
 5. **Projetos** — collection + render + hybrid visuals (US3).
-6. **Deploy** — Vercel adapter + import + DNS + Lighthouse (operator steps flagged).
+6. **Deploy** — static `dist/` + Netlify import + DNS + Lighthouse (operator steps flagged).
 
 Tour the detailed task list in [./tasks.md](./tasks.md).

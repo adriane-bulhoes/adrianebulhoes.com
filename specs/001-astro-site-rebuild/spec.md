@@ -5,7 +5,7 @@
 **Status**: Draft
 **Input**: Migrate the existing hand-coded static HTML site (5 pages, "basalt/glacier/lava"
 geology theme) to a maintainable Astro 6 project with Markdown-driven content collections,
-deployed live on Vercel at adrianebulhoes.com.
+deployed live on Netlify at adrianebulhoes.com.
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -139,7 +139,7 @@ by `order`, each showing title, status badge, stats, tools, and its chosen visua
 
 **Project & Foundation**
 - **FR-001**: The project MUST be an Astro 6 + TypeScript (strict) app with the
-  `@astrojs/react` and `@astrojs/vercel` integrations.
+  `@astrojs/react` integration (static output; no platform adapter — Netlify serves `dist/`).
 - **FR-002**: The design tokens and shared base styles MUST live in `src/styles/global.css`
   and reproduce the reconstructed `style.css` palette/typography.
 - **FR-003**: A `BaseLayout.astro` MUST provide `<head>` (meta, fonts, title), the nav,
@@ -174,8 +174,8 @@ by `order`, each showing title, status badge, stats, tools, and its chosen visua
   image when present (hybrid).
 
 **Deploy**
-- **FR-018**: The site MUST build with `@astrojs/vercel` and deploy on Vercel from the repo.
-- **FR-019**: The custom domain `adrianebulhoes.com` MUST resolve to the Vercel deployment
+- **FR-018**: The site MUST build to static `dist/` and deploy on Netlify from the repo.
+- **FR-019**: The custom domain `adrianebulhoes.com` MUST resolve to the Netlify deployment
   with automatic HTTPS. _(DNS/import are manual operator steps, documented in tasks.)_
 
 ### Key Data Types
@@ -214,7 +214,7 @@ Projeto = {
   and will be moved to `reference/` (not part of the live site).
 - Slugs derive from filenames (kebab-case) unless a frontmatter slug is added.
 - The PT/EN toggle remains visual-only until a future EN spec.
-- Vercel project + GoDaddy DNS are configured by the operator (Matt) using Adriane's
+- Netlify project + GoDaddy DNS are configured by the operator (Matt) using Adriane's
   accounts; the spec provides exact records but cannot perform those external steps.
 
 ## Success Criteria _(mandatory)_

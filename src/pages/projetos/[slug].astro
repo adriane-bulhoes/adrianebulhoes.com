@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StratumDivider from '../../components/StratumDivider.astro';
+import ProjetoCard from '../../components/ProjetoCard.astro';
+
+export const getStaticPaths = (async () => {
+  const projetos = await getCollection('projetos');
+  return projetos.map((projeto) => ({ params: { slug: projeto.id }, props: { projeto } }));
+}) satisfies GetStaticPaths;
+
+const { projeto } = Astro.props;
+const { title, subtitle, summary } = projeto.data;
+const heading = subtitle ? `${title} ${subtitle}` : title;
+---
+
+<BaseLayout title={`${heading} — Projetos`} description={summary ?? heading}>
+  <div class="proj-detail-top">
+    <a href="/projetos" class="back-link">Projetos</a>
+  </div>
+
+  <ProjetoCard projeto={projeto} compact />
+
+  <StratumDivider fill="#0a0e0f" bg="#111618" />
+
+  <section class="proj-cta">
+    <div class="reveal proj-cta-row">
+      <h2>Ver as <em>notas de campo</em>.</h2>
+      <div class="proj-cta-actions">
+        <a href="/fieldnotes" class="clink clink-primary">Field Notes</a>
+        <a href="/contato" class="clink">Colaborar</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .proj-detail-top { padding: 7rem 3rem 0; position: relative; z-index: 10; }
+  .back-link { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--glacier-deep); text-decoration: none; transition: color 0.3s; }
+  .back-link::before { content: '← '; }
+  .back-link:hover { color: var(--glacier-pale); }
+
+  .proj-cta { background: var(--basalt); padding: 5rem 3rem; position: relative; z-index: 10; }
+  .proj-cta-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+  .proj-cta-row h2 { font-family: var(--ff-serif); font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; }
+  .proj-cta-row h2 em { font-style: italic; color: var(--glacier-mid); }
+  .proj-cta-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+  @media (max-width: 900px) {
+    .proj-detail-top { padding: 6.5rem 1.5rem 0; }
+  }
+</style>

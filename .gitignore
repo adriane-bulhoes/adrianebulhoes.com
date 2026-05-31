@@ -14,4 +14,6 @@ dist/
 
 # Local Claude Code settings (keep machine-specific config out of the repo)
 .claude/settings.local.json
-.vercel
+
+# Netlify
+.netlify/

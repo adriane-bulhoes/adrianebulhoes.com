@@ -21,4 +21,29 @@ const fieldnotes = defineCollection({
     }),
 });
 
-export const collections = { fieldnotes };
+/**
+ * Projetos — research projects. One `.md` file per project. The `visual` enum
+ * picks a preset SVG; an optional `cover` image overrides it (hybrid visuals).
+ */
+const projetos = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/projetos' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      eyebrow: z.string().optional(),
+      coords: z.string().optional(),
+      summary: z.string().optional(),
+      status: z.enum(['em desenvolvimento', 'concluído', 'planeado']),
+      order: z.number().default(0),
+      stats: z
+        .array(z.object({ value: z.string(), label: z.string() }))
+        .default([]),
+      tools: z.array(z.string()).default([]),
+      visual: z.enum(['mangrove', 'geothermal', 'satellite-grid', 'basalt-strata']).optional(),
+      cover: image().optional(),
+      draft: z.boolean().default(false),
+    }),
+});
+
+export const collections = { fieldnotes, projetos };
