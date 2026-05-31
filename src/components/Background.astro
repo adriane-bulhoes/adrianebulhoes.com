@@ -1,0 +1,27 @@
+---
+/**
+ * Fixed background layers shared by every page: the animated wave canvas
+ * (island), the film-grain overlay, the faint tectonic line-art, and the
+ * custom cursor (island). Layering is handled by z-index in global.css.
+ */
+import WaveCanvas from './WaveCanvas.tsx';
+import Cursor from './Cursor.tsx';
+---
+
+<WaveCanvas client:load />
+
+<div class="grain" aria-hidden="true"></div>
+
+<div class="tectonic" aria-hidden="true">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#89c4d4" stroke-width=".6" fill="none">
+      <path d="M-100,180 Q200,160 400,200 Q600,240 800,190 Q1000,140 1200,210 Q1350,250 1600,200" />
+      <path d="M-100,350 Q150,320 350,380 Q550,440 750,370 Q950,300 1150,390 Q1350,460 1600,380" />
+      <path d="M-100,540 Q200,500 450,560 Q700,620 900,550 Q1100,480 1300,560 Q1450,610 1600,550" />
+      <path d="M-100,720 Q250,680 500,740 Q750,800 950,720 Q1150,640 1400,720 Q1500,760 1600,720" />
+    </g>
+    <line x1="720" y1="0" x2="680" y2="900" stroke="#c05a20" stroke-width=".8" stroke-dasharray="12 8" opacity=".5" />
+  </svg>
+</div>
+
+<Cursor client:idle />

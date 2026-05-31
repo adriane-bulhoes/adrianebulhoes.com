@@ -1,0 +1,16 @@
+---
+/**
+ * Scroll-reveal wrapper. Renders its slot inside a `.reveal` element that the
+ * BaseLayout observer fades in on scroll. `delay` staggers grouped reveals.
+ * Without JS the element is shown immediately (noscript fallback in BaseLayout).
+ */
+interface Props {
+  delay?: number;
+  class?: string;
+}
+const { delay, class: className } = Astro.props;
+---
+
+<div class:list={['reveal', className]} style={delay ? `transition-delay:${delay}s` : undefined}>
+  <slot />
+</div>

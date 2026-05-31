@@ -24,11 +24,11 @@ verification task and a checkpoint.
 
 **Purpose**: Stand up the Astro project and tooling.
 
-- [ ] T001 Scaffold Astro 6 + TypeScript (strict) project: `package.json`, `astro.config.mjs`, `tsconfig.json`, `src/env.d.ts`, minimal `src/pages/index.astro` placeholder; install dependencies.
-- [ ] T002 Add `@astrojs/react` and `@astrojs/vercel` integrations and wire them in `astro.config.mjs` (static output + Vercel adapter); add `react`/`react-dom`.
-- [ ] T003 [P] Archive originals: move `first-version.html` to `reference/`, delete duplicate `index_1.html`, and relocate the legacy root `*.html` out of the build path.
-- [ ] T004 [P] Add `.claude/launch.json` dev-server config for `npm run dev` and update `.gitignore` for Astro (`.astro/`, `.vercel/`).
-- [ ] T005 Verification: `npm run build` and `astro check` pass on the placeholder; commit captures clean output.
+- [x] T001 Scaffold Astro 6 + TypeScript (strict) project: `package.json`, `astro.config.mjs`, `tsconfig.json`, `src/env.d.ts`, minimal `src/pages/index.astro` placeholder; install dependencies.
+- [x] T002 Add `@astrojs/react` and `@astrojs/vercel` integrations and wire them in `astro.config.mjs` (static output + Vercel adapter); add `react`/`react-dom`.
+- [x] T003 [P] Archive originals: move `first-version.html` to `reference/`, delete duplicate `index_1.html`, and relocate the legacy root `*.html` out of the build path.
+- [x] T004 [P] Add `.claude/launch.json` dev-server config for `npm run dev` and update `.gitignore` for Astro (`.astro/`, `.vercel/`).
+- [x] T005 Verification: `npm run build` and `astro check` pass on the placeholder; commit captures clean output.
 
 **Checkpoint**: Astro builds; integrations and adapter configured.
 
@@ -41,15 +41,15 @@ verification task and a checkpoint.
 **Independent Test**: A page using `BaseLayout` renders dark theme, nav, footer, grain,
 animated canvas, and cursor at parity; reduced-motion suppresses animation.
 
-- [ ] T006 [US0] Port reconstructed `style.css` into `src/styles/global.css` (tokens + reset + base + nav/footer/reveal/divider/clink + responsive + reduced-motion).
-- [ ] T007 [US0] Implement `src/layouts/BaseLayout.astro`: `<head>` (meta, fonts `display=swap`, `<title>`/description props), imports `global.css`, renders `Nav` + `Background` + `<slot/>` + `Footer`.
-- [ ] T008 [P] [US0] Implement `src/components/Nav.astro` (logo, links, PT/EN toggle markup) with `aria-current` on the active link.
-- [ ] T009 [P] [US0] Implement `src/components/Footer.astro`.
-- [ ] T010 [P] [US0] Implement `src/components/Background.astro` (grain + tectonic SVG + `#bg-canvas` element) and `src/components/StratumDivider.astro`.
-- [ ] T011 [US0] Implement `src/components/WaveCanvas.tsx` React island (port the canvas wave animation; guard on `prefers-reduced-motion`) and mount it `client:load` in `Background`.
-- [ ] T012 [US0] Implement `src/components/Cursor.tsx` React island (custom dot+ring cursor; disabled on coarse pointers) mounted `client:idle`; implement `Reveal.astro` scroll-reveal (IntersectionObserver, `.on`).
-- [ ] T013 [US0] Implement the PT/EN toggle island behavior (visual toggle only, no nav break) and active-state handling.
-- [ ] T014 [US0] Verification: build + preview; screenshot a `BaseLayout` demo at 1280px and 375px and confirm parity with the current site; confirm reduced-motion suppresses animation.
+- [x] T006 [US0] Port reconstructed `style.css` into `src/styles/global.css` (tokens + reset + base + nav/footer/reveal/divider/clink + responsive + reduced-motion).
+- [x] T007 [US0] Implement `src/layouts/BaseLayout.astro`: `<head>` (meta, fonts `display=swap`, `<title>`/description props), imports `global.css`, renders `Nav` + `Background` + `<slot/>` + `Footer`.
+- [x] T008 [P] [US0] Implement `src/components/Nav.astro` (logo, links, PT/EN toggle markup) with `aria-current` on the active link.
+- [x] T009 [P] [US0] Implement `src/components/Footer.astro`.
+- [x] T010 [P] [US0] Implement `src/components/Background.astro` (grain + tectonic SVG + `#bg-canvas` element) and `src/components/StratumDivider.astro`.
+- [x] T011 [US0] Implement `src/components/WaveCanvas.tsx` React island (port the canvas wave animation; guard on `prefers-reduced-motion`) and mount it `client:load` in `Background`.
+- [x] T012 [US0] Implement `src/components/Cursor.tsx` React island (custom dot+ring cursor; disabled on coarse pointers) mounted `client:idle`; implement `Reveal.astro` scroll-reveal (IntersectionObserver, `.on`).
+- [x] T013 [US0] Implement the PT/EN toggle island behavior (visual toggle only, no nav break) and active-state handling.
+- [x] T014 [US0] Verification: build + preview; screenshot a `BaseLayout` demo at 1280px and 375px and confirm parity with the current site; confirm reduced-motion suppresses animation.
 
 **Checkpoint**: Shared design layer complete; any page can compose from it.
 
@@ -62,7 +62,7 @@ animated canvas, and cursor at parity; reduced-motion suppresses animation.
 **Independent Test**: `/`, `/sobre`, `/contato`, and an unknown path render at parity on
 desktop and mobile with working nav links.
 
-- [ ] T015 [US1] Implement `src/pages/index.astro` (hero, intro strip, project teaser, Field Notes teaser placeholder, contact mini) using `BaseLayout` + scoped styles.
+- [x] T015 [US1] Implement `src/pages/index.astro` (hero, intro strip, project teaser, Field Notes teaser placeholder, contact mini) using `BaseLayout` + scoped styles.
 - [ ] T016 [P] [US1] Implement `src/pages/sobre.astro` at parity with `sobre.html`.
 - [ ] T017 [P] [US1] Implement `src/pages/contato.astro` at parity with `contato.html`.
 - [ ] T018 [P] [US1] Implement `src/pages/404.astro` (themed, link home).

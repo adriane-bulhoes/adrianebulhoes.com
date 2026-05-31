@@ -1,0 +1,22 @@
+---
+/**
+ * Geological "strata" wave divider between sections. `fill` is the colour of
+ * the section that follows; `bg` paints the strip behind the wave (the section
+ * above); `accent` adds the faint gold mineral line used on the first divider.
+ */
+interface Props {
+  fill: string;
+  bg?: string;
+  accent?: boolean;
+}
+const { fill, bg, accent = false } = Astro.props;
+---
+
+<div class="stratum-divider" style={bg ? `background:${bg}` : undefined} aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 Q360,80 720,50 Q1080,20 1440,65 L1440,80 L0,80 Z" fill={fill} />
+    {accent && (
+      <path d="M0,55 Q400,85 800,58 Q1100,32 1440,70" fill="none" stroke="#b8922a" stroke-width=".5" opacity=".25" />
+    )}
+  </svg>
+</div>
