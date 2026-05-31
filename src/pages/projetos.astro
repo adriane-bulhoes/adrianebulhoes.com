@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StratumDivider from '../components/StratumDivider.astro';
-import ProjetoCard from '../components/ProjetoCard.astro';
+import ProjetoTeaserCard from '../components/ProjetoTeaserCard.astro';
 
 const projetos = (
   await getCollection('projetos', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
@@ -21,23 +21,19 @@ const projetos = (
 
   <StratumDivider fill="#111618" />
 
-  {projetos.length === 0 ? (
-    <section class="proj-empty">
-      <div class="section-label">Projetos <span>— investigação</span></div>
+  <!-- LISTING -->
+  <section class="proj-list">
+    <div class="section-label">Projetos <span>— investigação</span></div>
+    {projetos.length === 0 ? (
       <p class="proj-empty-note">Ainda não há projetos publicados — em breve.</p>
-    </section>
-  ) : (
-    projetos.map((projeto, i) => (
-      <>
-        <ProjetoCard projeto={projeto} alt={i % 2 === 1} />
-        {i < projetos.length - 1 && (
-          <StratumDivider fill={i % 2 === 0 ? '#162020' : '#111618'} bg={i % 2 === 0 ? '#111618' : '#162020'} />
-        )}
-      </>
-    ))
-  )}
+    ) : (
+      <div class="proj-grid">
+        {projetos.map((projeto, i) => <ProjetoTeaserCard projeto={projeto} index={i} />)}
+      </div>
+    )}
+  </section>
 
-  <StratumDivider fill="#0a0e0f" bg={projetos.length % 2 === 0 ? '#162020' : '#111618'} />
+  <StratumDivider fill="#0a0e0f" bg="#111618" />
 
   <!-- CTA -->
   <section class="proj-cta">
@@ -63,7 +59,8 @@ const projetos = (
     overflow: hidden;
   }
 
-  .proj-empty { padding: 7rem 3rem; position: relative; z-index: 10; }
+  .proj-list { background: var(--obsidian); padding: 6rem 3rem 7rem; position: relative; z-index: 10; }
+  .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1rem; }
   .proj-empty-note { color: var(--text-dim); font-style: italic; font-family: var(--ff-serif); font-size: 1.2rem; }
 
   .proj-cta { background: var(--basalt); padding: 5rem 3rem; position: relative; z-index: 10; }
@@ -71,4 +68,9 @@ const projetos = (
   .proj-cta-row h2 { font-family: var(--ff-serif); font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; }
   .proj-cta-row h2 em { font-style: italic; color: var(--glacier-mid); }
   .proj-cta-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+  @media (max-width: 900px) {
+    .proj-list { padding: 4rem 1.5rem 5rem; }
+    .proj-grid { grid-template-columns: 1fr; }
+  }
 </style>
