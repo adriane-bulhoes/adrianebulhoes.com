@@ -1,0 +1,62 @@
+---
+/**
+ * Base page layout: <head> (meta, fonts, title), the shared background layers,
+ * nav, the page <slot/>, footer, and the scroll-reveal observer.
+ */
+import '../styles/global.css';
+import Background from '../components/Background.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Adriane Santana Bulhões — investigadora em Ciências da Terra. Ecologia costeira e sensoriamento remoto, do manguezal da Bahia às costas vulcânicas da Oceania.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Without JS, reveal-on-scroll content must still be visible -->
+    <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+    <title>{title}</title>
+  </head>
+  <body>
+    <Background />
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const obs = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('on');
+              obs.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.1 },
+      );
+      document.querySelectorAll('.reveal:not(.on)').forEach((el) => obs.observe(el));
+    </script>
+  </body>
+</html>
