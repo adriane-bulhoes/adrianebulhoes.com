@@ -1,6 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StratumDivider from '../components/StratumDivider.astro';
+import { monthYear } from '../lib/format-date';
+
+const latestNotes = (
+  await getCollection('fieldnotes', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
+)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout title="Adriane Santana Bulhões — Investigadora em Ciências da Terra">
@@ -119,24 +127,14 @@ import StratumDivider from '../components/StratumDivider.astro';
   <div class="fn-teaser">
     <div class="section-label">Field Notes <span>— últimas entradas</span></div>
     <div class="fn-grid">
-      <div class="fn-card reveal">
-        <div class="fn-date">Março 2025</div>
-        <div class="fn-loc">◎ Oneroa, Waiheke Island — NZ</div>
-        <p class="fn-excerpt">"Maré baixa às seis da manhã. O basalto exposto revela estratos que não aparecem em nenhum mapa local — camadas de tempo visíveis a olho nu."</p>
-        <div class="fn-tag">geologia costeira</div>
-      </div>
-      <div class="fn-card reveal" style="transition-delay:.1s">
-        <div class="fn-date">Fevereiro 2025</div>
-        <div class="fn-loc">◎ Wai-O-Tapu, Rotorua — NZ</div>
-        <p class="fn-excerpt">"A cor laranja da Champagne Pool não é alga — é arsênio precipitado. Geoquímica visível a olho nu, sem equipamento."</p>
-        <div class="fn-tag">geotérmico · vulcanismo</div>
-      </div>
-      <div class="fn-card reveal" style="transition-delay:.2s">
-        <div class="fn-date">Janeiro 2025</div>
-        <div class="fn-loc">◎ Ilha de Bom Jesus dos Passos — BR</div>
-        <p class="fn-excerpt">"O manguezal que conheci em criança tem hoje 40% menos cobertura segundo o GEE. Mas o que o satélite não vê é o silêncio que ficou."</p>
-        <div class="fn-tag">manguezal · memória</div>
-      </div>
+      {latestNotes.map((note, i) => (
+        <a class="fn-card reveal" href={`/fieldnotes/${note.id}`} style={i ? `transition-delay:${i * 0.1}s` : undefined}>
+          <div class="fn-date">{monthYear(note.data.date)}</div>
+          <div class="fn-loc">◎ {note.data.location}</div>
+          <p class="fn-excerpt">{note.data.excerpt ?? note.data.title}</p>
+          <div class="fn-tag">{note.data.tags.slice(0, 2).join(' · ')}</div>
+        </a>
+      ))}
     </div>
     <div style="margin-top:2rem;"><a href="/fieldnotes" class="intro-cta">Ler todas as entradas</a></div>
   </div>
@@ -403,6 +401,8 @@ import StratumDivider from '../components/StratumDivider.astro';
     transition: background 0.3s;
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    color: inherit;
   }
   .fn-card:hover { background: var(--deep-rock); }
   .fn-date { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--glacier-deep); margin-bottom: 0.6rem; }
