@@ -314,6 +314,51 @@ footer p {
   transform: none;
 }
 
+/* ---- Inner-page hero (sobre, projetos, fieldnotes) -------------------- */
+.page-hero-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--glacier-deep);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.6rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+.page-hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--lava-glow);
+}
+.page-hero-title {
+  font-family: var(--ff-serif);
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4em;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.9s ease forwards 0.35s;
+}
+.page-hero-title em { font-style: italic; color: var(--glacier-mid); font-weight: 300; }
+.page-hero-sub {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  color: var(--text-mid);
+  line-height: 1.5;
+  max-width: 560px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards 0.5s;
+}
+
 /* ---- Keyframes -------------------------------------------------------- */
 /* Used by hero entrance animations declared inline (animation: fadeUp ...) */
 @keyframes fadeUp {
