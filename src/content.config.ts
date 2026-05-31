@@ -33,6 +33,7 @@ const projetos = defineCollection({
       subtitle: z.string().optional(),
       eyebrow: z.string().optional(),
       coords: z.string().optional(),
+      summary: z.string().optional(),
       status: z.enum(['em desenvolvimento', 'concluído', 'planeado']),
       order: z.number().default(0),
       stats: z

@@ -3,6 +3,7 @@ title: "Bom Jesus"
 subtitle: "dos Passos"
 eyebrow: "Projeto principal · Salvador, Bahia"
 coords: "12°57'S · 38°37'W · Brasil"
+summary: "Análise temporal da perda de cobertura de manguezal na ilha onde cresci — mapeamento por satélite de 1985 ao presente."
 status: "em desenvolvimento"
 order: 1
 stats:

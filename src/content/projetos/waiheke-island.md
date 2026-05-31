@@ -3,6 +3,7 @@ title: "Waiheke"
 subtitle: "Island"
 eyebrow: "Projeto 02 · em desenvolvimento"
 coords: "36°47'S · 175°06'E · Auckland, Nova Zelândia"
+summary: "Biodiversidade costeira e intertidal de uma ilha vulcânica — registo via iNaturalist, a correlacionar com Bom Jesus."
 status: "em desenvolvimento"
 order: 2
 tools: ["iNaturalist", "Biodiversidade costeira", "Geologia vulcânica", "Em construção"]
