@@ -9,12 +9,12 @@ rules and [`specs/`](specs/) for the spec-driven feature breakdown.
 
 ## Local development
 
-Requires Node `>=20.3.0` (CI/Vercel use Node 22).
+Requires Node `>=20.3.0` (CI/Netlify use Node 22).
 
 ```bash
 npm install
 npm run dev      # dev server at http://localhost:4321
-npm run build    # static build (Vercel Build Output) into .vercel/output
+npm run build    # static build into dist/
 npm run check    # astro check — type + content-schema validation
 ```
 
@@ -80,20 +80,26 @@ reference/                   # archived original hand-coded HTML (not built)
 specs/                       # spec-driven development docs
 ```
 
-## Deployment (Vercel + GoDaddy)
+## Deployment (Netlify + GoDaddy)
 
-The public site is static; Vercel auto-detects Astro and the `@astrojs/vercel` adapter
-emits the Build Output — **no `vercel.json` needed**. One-time setup:
+The public site is static (builds to `dist/`); Netlify auto-detects Astro, and
+[`netlify.toml`](netlify.toml) pins the build command, publish dir, and Node version.
+No platform adapter is needed for static output — the `@astrojs/netlify` adapter is added
+later in spec `002-keystatic-cms`, when Keystatic introduces server routes. One-time setup:
 
-1. **Import** the repo at [vercel.com](https://vercel.com) signed in with Adriane's GitHub
-   → New Project → select `adrianebulhoes.com`. Framework preset auto-detects as **Astro**.
-   First deploy lands on a `*.vercel.app` URL.
-2. **Custom domain**: Project → Settings → Domains → add `adrianebulhoes.com`. Vercel shows
-   the exact DNS records.
-3. **GoDaddy DNS** (Manage DNS): add what Vercel shows — typically an **A** record on host
-   `@` → Vercel's IP (currently `76.76.21.21`, confirm in Vercel), and a **CNAME** on host
-   `www` → `cname.vercel-dns.com`. Remove GoDaddy's parked-page A record and any forwarding.
-4. Wait for DNS to propagate (minutes–48h). Vercel issues the HTTPS certificate automatically.
+1. **Import** the repo at [app.netlify.com](https://app.netlify.com) signed in with Adriane's
+   GitHub → **Add new site → Import an existing project** → pick `adrianebulhoes.com`. Netlify
+   reads `netlify.toml` (build `astro build`, publish `dist`). First deploy lands on a
+   `*.netlify.app` URL.
+2. **Custom domain**: Site → **Domain management → Add a domain** → `adrianebulhoes.com`.
+3. **GoDaddy DNS** (Manage DNS) — keeping GoDaddy as the DNS host:
+   - **A** record, host `@` → `75.2.60.5` (Netlify's load balancer; confirm in Netlify).
+   - **CNAME** record, host `www` → `<your-site>.netlify.app`.
+   - Remove GoDaddy's parked-page A record and any forwarding.
+   - *(Alternative: in Netlify choose "Use Netlify DNS" and point GoDaddy's nameservers at the
+     four Netlify nameservers it shows — Netlify then manages DNS.)*
+4. Wait for DNS to propagate (minutes–48h). Netlify provisions the HTTPS certificate
+   (Let's Encrypt) automatically once the domain resolves.
 
 After this, **every push to `main` auto-deploys**. Once Keystatic (spec 002) is live, an
 editor save commits to the repo and triggers the same auto-deploy.

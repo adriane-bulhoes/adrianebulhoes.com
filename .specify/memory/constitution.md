@@ -72,7 +72,7 @@ CSS, or config.
 
 ## IX. Tenant of One — Ownership
 
-The repository, deploys, and domain live under **Adriane's** GitHub/Vercel ownership.
+The repository, deploys, and domain live under **Adriane's** GitHub/Netlify ownership.
 Commits to this repo are authored as her (`user.email`/`user.name` set per-repo).
 
 ---
@@ -87,8 +87,8 @@ Commits to this repo are authored as her (`user.email`/`user.name` set per-repo)
 | Content | Astro Content Collections (Markdown, `glob` loader) |
 | Styling | Hand-authored CSS + design tokens + scoped styles |
 | CMS (spec 002) | Keystatic (GitHub mode) |
-| Hosting | Vercel (Hobby), `@astrojs/vercel` adapter |
-| Registrar/DNS | GoDaddy (A record → Vercel apex, CNAME `www`) |
+| Hosting | Netlify (free tier); static `dist/` (Netlify adapter added in spec 002) |
+| Registrar/DNS | GoDaddy (A `@` → Netlify `75.2.60.5`, CNAME `www`) |
 
 ## Amendments
 

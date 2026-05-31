@@ -34,11 +34,11 @@
 ## Phase 4: GitHub mode (prod auth)
 
 - [ ] T007 **[operator]** Create/connect the GitHub App for the repo and set the required
-  Keystatic env vars in Vercel (client id/secret, secret) under Adriane's accounts.
+  Keystatic env vars in Netlify (client id/secret, secret) under Adriane's accounts.
 - [ ] T008 Switch storage to `kind: 'github'` (repo `adriane-bulhoes/adrianebulhoes.com`) with
   local-mode fallback for dev; ensure `/api/keystatic/[...params]` routes deploy as functions.
 - [ ] T009 Verification: on the deployed site, log in at `/keystatic` with GitHub, Save an
-  edit, confirm the commit lands and Vercel auto-rebuilds.
+  edit, confirm the commit lands and Netlify auto-rebuilds.
 
 ## Phase 5: Verify & handoff
 
@@ -51,4 +51,4 @@
 
 - T002/T003 must mirror the `001` schemas exactly (Edge Case: schema mismatch breaks builds).
 - T007 (operator GitHub App + env vars) gates T008/T009.
-- T008 depends on the Vercel deploy from `001` (Phase 6).
+- T008 depends on the Netlify deploy from `001` (Phase 6).

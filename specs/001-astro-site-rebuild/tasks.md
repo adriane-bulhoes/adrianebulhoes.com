@@ -25,9 +25,9 @@ verification task and a checkpoint.
 **Purpose**: Stand up the Astro project and tooling.
 
 - [x] T001 Scaffold Astro 6 + TypeScript (strict) project: `package.json`, `astro.config.mjs`, `tsconfig.json`, `src/env.d.ts`, minimal `src/pages/index.astro` placeholder; install dependencies.
-- [x] T002 Add `@astrojs/react` and `@astrojs/vercel` integrations and wire them in `astro.config.mjs` (static output + Vercel adapter); add `react`/`react-dom`.
+- [x] T002 Add `@astrojs/react` integration and wire it in `astro.config.mjs` (static output; no platform adapter — Netlify serves `dist/`, the Netlify adapter is added in spec 002); add `react`/`react-dom`.
 - [x] T003 [P] Archive originals: move `first-version.html` to `reference/`, delete duplicate `index_1.html`, and relocate the legacy root `*.html` out of the build path.
-- [x] T004 [P] Add `.claude/launch.json` dev-server config for `npm run dev` and update `.gitignore` for Astro (`.astro/`, `.vercel/`).
+- [x] T004 [P] Add `.claude/launch.json` dev-server config for `npm run dev` and update `.gitignore` for Astro (`.astro/`, `.netlify/`).
 - [x] T005 Verification: `npm run build` and `astro check` pass on the placeholder; commit captures clean output.
 
 **Checkpoint**: Astro builds; integrations and adapter configured.
@@ -110,11 +110,11 @@ and the correct preset visual or cover override.
 
 ## Phase 6: Deploy (US1)
 
-**Goal**: Live on Vercel at adrianebulhoes.com.
+**Goal**: Live on Netlify at adrianebulhoes.com.
 
-- [ ] T032 [US1] Confirm `@astrojs/vercel` static build output and add any needed `vercel.json`; verify `npm run build` produces a deployable output.
-- [ ] T033 [US1] **[operator]** Import the repo on Vercel using Adriane's GitHub; confirm first deploy on the `*.vercel.app` URL.
-- [ ] T034 [US1] **[operator]** Add `adrianebulhoes.com` in Vercel and configure GoDaddy DNS (A `@` → Vercel IP; CNAME `www` → `cname.vercel-dns.com`); remove GoDaddy parking/forwarding.
+- [x] T032 [US1] Static `dist/` build output (no platform adapter); add `netlify.toml`; verify `npm run build` produces a deployable `dist/`.
+- [ ] T033 [US1] **[operator]** Import the repo on Netlify using Adriane's GitHub; confirm first deploy on the `*.netlify.app` URL.
+- [ ] T034 [US1] **[operator]** Add `adrianebulhoes.com` in Netlify and configure GoDaddy DNS (A `@` → Netlify `75.2.60.5`; CNAME `www` → `<site>.netlify.app`); remove GoDaddy parking/forwarding.
 - [ ] T035 [US1] Verification: site loads over HTTPS at the domain; run Lighthouse on `/` and an article page and record ≥ 95 across categories.
 
 **Checkpoint**: Site is live and meets the performance/a11y budget.
