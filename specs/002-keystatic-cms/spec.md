@@ -29,7 +29,7 @@ in the repo and the note appears on the live `/fieldnotes` after the auto-rebuil
 1. **Given** the deployed `/keystatic`, **When** Adriane logs in with GitHub, **Then** she
    sees **Field Notes** and **Projetos** collections in the sidebar.
 2. **Given** the Field Note editor, **When** she fills the fields and clicks Save, **Then** a
-   Markdown file is committed to `src/content/fieldnotes/` and a Vercel rebuild publishes it.
+   Markdown file is committed to `src/content/fieldnotes/` and a Netlify rebuild publishes it.
 3. **Given** the editor body, **When** she inserts an image inline, **Then** the image is
    uploaded into the repo and renders in the article flow.
 4. **Given** the editor body, **When** she inserts a predefined block (image+caption,
@@ -68,13 +68,13 @@ in the repo and the note appears on the live `/fieldnotes` after the auto-rebuil
 - **FR-006**: **GitHub mode** MUST be configured for the deployed site: a GitHub App, the
   required env vars, and the `/api/keystatic/[...params]` routes, so Adriane logs in with
   GitHub and saves commit to the repo.
-- **FR-007**: Saving in GitHub mode MUST trigger the Vercel auto-rebuild (commit-to-deploy).
+- **FR-007**: Saving in GitHub mode MUST trigger the Netlify auto-rebuild (commit-to-deploy).
 
 ## Assumptions
 
 - Spec `001` is merged and deployed; the collections and their schemas exist.
 - Adriane has a GitHub account with write access to the repo (already arranged).
-- The deployment runs the Keystatic API routes server-side (Vercel functions) — the public
+- The deployment runs the Keystatic API routes server-side (Netlify functions) — the public
   pages remain static; only `/keystatic` and `/api/keystatic/*` are dynamic.
 
 ## Success Criteria _(mandatory)_

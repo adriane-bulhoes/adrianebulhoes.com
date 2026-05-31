@@ -3,6 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=20.3.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -13,7 +16,6 @@
   },
   "dependencies": {
     "@astrojs/react": "^5.0.6",
-    "@astrojs/vercel": "^10.0.8",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "astro": "^6.4.2",
