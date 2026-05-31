@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projetos — Adriane Santana Bulhões</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.proj-hero { min-height:55vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 3rem 5rem; position:relative; z-index:10; overflow:hidden; }
+
+/* PROJECT BLOCKS */
+.proj-block { padding:7rem 3rem; position:relative; z-index:10; }
+.proj-block.alt { background:var(--deep-rock); }
+.proj-block.dark { background:var(--obsidian); }
+
+.proj-header { display:grid; grid-template-columns:1fr auto; align-items:end; gap:2rem; margin-bottom:4rem; }
+.proj-num { font-family:var(--ff-serif); font-size:5rem; font-weight:300; color:rgba(200,232,240,.06); line-height:1; position:absolute; right:3rem; top:4rem; letter-spacing:-.02em; pointer-events:none; }
+.proj-eyebrow { font-size:.55rem; letter-spacing:.28em; text-transform:uppercase; color:var(--lava-glow); margin-bottom:1rem; }
+.proj-title { font-family:var(--ff-serif); font-size:clamp(2.5rem,5vw,4.5rem); font-weight:300; line-height:.95; }
+.proj-title em { font-style:italic; color:var(--mineral-pale); }
+.proj-title small { display:block; font-family:var(--ff-mono); font-size:.62rem; letter-spacing:.14em; color:var(--text-dim); margin-top:.6rem; }
+.proj-coords { font-size:.62rem; letter-spacing:.1em; text-align:right; color:var(--text-dim); line-height:2; }
+
+.proj-body { display:grid; grid-template-columns:1.2fr 1fr; gap:5rem; align-items:start; }
+.proj-vis { width:100%; border-radius:3px; overflow:hidden; background:var(--basalt); margin-bottom:1.5rem; }
+.proj-desc p { font-size:.88rem; line-height:1.95; color:#6a9aaa; margin-bottom:1.4rem; font-weight:300; }
+.proj-desc p strong { color:var(--glacier-pale); font-weight:400; }
+.proj-desc .pull { font-family:var(--ff-serif); font-style:italic; font-size:1.2rem; color:var(--text-mid); line-height:1.4; border-left:1px solid var(--glacier-deep); padding-left:1.5rem; margin:2rem 0; }
+
+.stats-row { display:flex; gap:2.5rem; margin:2rem 0; flex-wrap:wrap; }
+.stat { }
+.stat-n { font-family:var(--ff-serif); font-size:2.5rem; font-weight:300; color:var(--mineral-pale); line-height:1; }
+.stat-l { font-size:.55rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-dim); margin-top:.2rem; }
+
+.proj-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(200,232,240,.07); border:1px solid rgba(200,232,240,.07); border-radius:3px; overflow:hidden; margin-top:3rem; }
+.pcard { background:var(--obsidian); padding:2.2rem; transition:background .3s; }
+.proj-block.alt .pcard { background:var(--deep-rock); }
+.pcard:hover { background:var(--rock-mid); }
+.pcard-n { font-family:var(--ff-serif); font-size:2.6rem; font-weight:300; color:var(--mineral-pale); line-height:1; margin-bottom:.5rem; }
+.pcard-l { font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text-dim); margin-bottom:.9rem; }
+.pcard-d { font-size:.78rem; line-height:1.75; color:#5a8a9a; font-weight:300; }
+
+/* WAIHEKE — teaser/em desenvolvimento */
+.waiheke-teaser { padding:7rem 3rem; position:relative; z-index:10; background:var(--basalt); overflow:hidden; }
+.wt-inner { display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:center; }
+.wt-badge {
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-size:.55rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--lava-bright); border:1px solid rgba(224,112,48,.3);
+  padding:.35em .9em; border-radius:2px; margin-bottom:1.5rem;
+}
+.wt-badge::before { content:'●'; font-size:.4rem; animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+.wt-title { font-family:var(--ff-serif); font-size:clamp(2rem,4vw,3.5rem); font-weight:300; line-height:1; margin-bottom:1.2rem; }
+.wt-title em { font-style:italic; color:var(--glacier-mid); }
+.wt-desc p { font-size:.85rem; line-height:1.9; color:var(--text-dim); margin-bottom:1.2rem; font-weight:300; }
+.wt-connection { background:var(--deep-rock); border-left:2px solid var(--glacier-deep); padding:1.2rem 1.5rem; margin:1.5rem 0; }
+.wt-connection p { font-family:var(--ff-serif); font-style:italic; font-size:1rem; color:var(--text-mid); line-height:1.5; margin:0; }
+.wt-vis { position:relative; }
+.wt-map { width:100%; height:320px; border-radius:3px; overflow:hidden; background:var(--obsidian); }
+
+/* VOLUNTARIADOS */
+.vol-section { padding:7rem 3rem; position:relative; z-index:10; background:var(--deep-rock); }
+.vol-placeholder { background:var(--obsidian); border:1px solid rgba(200,232,240,.06); border-radius:3px; padding:4rem 3rem; text-align:center; margin-top:2rem; }
+.vol-icon { font-size:2.5rem; margin-bottom:1.2rem; opacity:.4; }
+.vol-coming { font-family:var(--ff-serif); font-style:italic; font-size:1.4rem; color:var(--text-dim); margin-bottom:.8rem; }
+.vol-sub { font-size:.75rem; letter-spacing:.08em; color:var(--text-ghost); line-height:1.8; max-width:400px; margin:0 auto; }
+
+@media (max-width:900px) {
+  .proj-body { grid-template-columns:1fr; }
+  .proj-header { grid-template-columns:1fr; }
+  .proj-cards { grid-template-columns:1fr; }
+  .wt-inner { grid-template-columns:1fr; }
+  .proj-num { display:none; }
+}
+</style>
+</head>
+<body>
+<div id="cur-dot"></div><div id="cur-ring"></div>
+<div class="grain"></div><canvas id="bg-canvas"></canvas>
+<div class="tectonic">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#89c4d4" stroke-width=".6" fill="none">
+      <path d="M-100,180 Q200,160 400,200 Q600,240 800,190 Q1000,140 1200,210 Q1350,250 1600,200"/>
+      <path d="M-100,500 Q200,470 450,510 Q700,550 900,490 Q1100,430 1300,500 Q1450,545 1600,490"/>
+    </g>
+    <line x1="720" y1="0" x2="680" y2="900" stroke="#c05a20" stroke-width=".8" stroke-dasharray="12 8" opacity=".4"/>
+  </svg>
+</div>
+<nav>
+  <a href="index.html" class="nav-logo">Adriane S<span>.</span> Bulhões</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="projetos.html" class="active">Projetos</a></li>
+      <li><a href="fieldnotes.html">Field Notes</a></li>
+      <li><a href="contato.html">Contacto</a></li>
+    </ul>
+    <div class="lang-toggle"><button class="active">PT</button><button>EN</button></div>
+  </div>
+</nav>
+
+<main>
+<!-- HERO -->
+<section class="proj-hero">
+  <div class="glow" style="width:650px;height:650px;background:rgba(184,146,42,.07);top:-150px;right:-200px;animation-delay:-5s;"></div>
+  <div class="glow" style="width:400px;height:400px;background:rgba(74,154,176,.07);bottom:0;left:5%;animation-delay:-12s;"></div>
+  <div class="page-hero-eyebrow">Investigação</div>
+  <h1 class="page-hero-title">Projetos<br><em>em curso</em></h1>
+  <p class="page-hero-sub">Dois territórios. Uma mesma pergunta sobre pressão, perda e resistência dos ecossistemas costeiros.</p>
+</section>
+
+<!-- STRATUM -->
+<div class="stratum-divider"><svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,40 Q360,80 720,50 Q1080,20 1440,65 L1440,80 L0,80 Z" fill="#111618"/></svg></div>
+
+<!-- PROJETO 01 — BOM JESUS -->
+<section class="proj-block dark" id="bom-jesus">
+  <div class="proj-num">01</div>
+  <div class="proj-header reveal">
+    <div>
+      <div class="proj-eyebrow">Projeto principal · Salvador, Bahia</div>
+      <h2 class="proj-title">Bom Jesus <em>dos Passos</em><small>12°57'S · 38°37'W · Brasil</small></h2>
+    </div>
+    <div class="proj-coords">Análise temporal<br>1985 → presente<br><span style="color:var(--mineral-pale)">Google Earth Engine</span></div>
+  </div>
+
+  <div class="proj-body">
+    <div>
+      <!-- Ocean visualization -->
+      <div class="proj-vis" style="height:340px;">
+        <svg viewBox="0 0 580 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+          <defs>
+            <radialGradient id="og1" cx="45%" cy="60%" r="70%"><stop offset="0%" stop-color="#0d2535"/><stop offset="100%" stop-color="#040c14"/></radialGradient>
+            <filter id="gf1"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <rect width="580" height="340" fill="url(#og1)"/>
+          <g fill="none" opacity=".2" stroke="#4a9ab0">
+            <ellipse cx="270" cy="275" rx="250" ry="78" stroke-width=".8"/>
+            <ellipse cx="270" cy="262" rx="200" ry="62" stroke-width=".7"/>
+            <ellipse cx="270" cy="248" rx="150" ry="47" stroke-width=".6"/>
+            <ellipse cx="270" cy="234" rx="100" ry="34" stroke-width=".5"/>
+          </g>
+          <ellipse cx="270" cy="260" rx="190" ry="60" fill="#1a5070" opacity=".2"/>
+          <path d="M110,320 Q148,270 168,218 Q188,168 222,145 Q256,122 285,132 Q314,142 332,170 Q350,198 368,224 Q386,250 408,278 Q430,306 452,322 Z" fill="#1a3828" opacity=".95"/>
+          <path d="M128,320 Q164,274 182,224 Q200,176 230,155 Q260,135 286,144 Q312,153 330,180 Q348,206 364,230 Q380,254 400,280 Q420,304 440,320 Z" fill="#1e4535" opacity=".7"/>
+          <ellipse cx="215" cy="193" rx="38" ry="20" fill="#0d3a22" opacity=".9"/>
+          <ellipse cx="258" cy="172" rx="30" ry="15" fill="#0d3a22" opacity=".85"/>
+          <ellipse cx="308" cy="162" rx="34" ry="17" fill="#0d3a22" opacity=".85"/>
+          <ellipse cx="348" cy="180" rx="24" ry="12" fill="#0d3a22" opacity=".8"/>
+          <ellipse cx="280" cy="162" rx="26" ry="13" fill="#2a5038" opacity=".45"/>
+          <ellipse cx="330" cy="168" rx="18" ry="9" fill="#2a5038" opacity=".4"/>
+          <rect x="262" y="143" width="24" height="16" rx="1" fill="#8a4010" opacity=".75"/>
+          <rect x="292" y="137" width="18" height="13" rx="1" fill="#8a4010" opacity=".65"/>
+          <rect x="316" y="148" width="16" height="14" rx="1" fill="#8a4010" opacity=".7"/>
+          <g opacity=".12" stroke="#89c4d4" stroke-width=".6">
+            <path d="M0,55 Q145,38 290,56 Q435,73 580,50"/>
+            <path d="M0,110 Q130,90 290,112 Q450,133 580,105"/>
+            <path d="M0,285 Q150,268 290,287 Q430,305 580,278"/>
+          </g>
+          <g opacity=".07" stroke="#89c4d4" stroke-width=".4">
+            <line x1="115" y1="0" x2="115" y2="340"/><line x1="230" y1="0" x2="230" y2="340"/>
+            <line x1="345" y1="0" x2="345" y2="340"/><line x1="460" y1="0" x2="460" y2="340"/>
+            <line x1="0" y1="85" x2="580" y2="85"/><line x1="0" y1="170" x2="580" y2="170"/><line x1="0" y1="255" x2="580" y2="255"/>
+          </g>
+          <rect x="380" y="18" width="186" height="120" rx="2" fill="rgba(7,21,32,.9)" stroke="rgba(137,196,212,.15)" stroke-width=".5"/>
+          <text x="396" y="40" fill="#89c4d4" font-family="DM Mono,monospace" font-size="8" letter-spacing="2">LEGENDA</text>
+          <rect x="396" y="52" width="10" height="7" rx="1" fill="#1e4535"/><text x="412" y="59" fill="#5a8a9a" font-family="DM Mono,monospace" font-size="8">Manguezal preservado</text>
+          <rect x="396" y="70" width="10" height="7" rx="1" fill="#2a5038" opacity=".5"/><text x="412" y="77" fill="#5a8a9a" font-family="DM Mono,monospace" font-size="8">Manguezal degradado</text>
+          <rect x="396" y="88" width="10" height="7" rx="1" fill="#8a4010"/><text x="412" y="95" fill="#5a8a9a" font-family="DM Mono,monospace" font-size="8">Desenvolvimento urbano</text>
+          <line x1="396" y1="108" x2="560" y2="108" stroke="rgba(137,196,212,.08)" stroke-width=".5"/>
+          <text x="396" y="122" fill="#2a5a6a" font-family="DM Mono,monospace" font-size="7">GEE · Sentinel-2 · Landsat</text>
+          <circle cx="280" cy="196" r="4" fill="#c05a20" opacity=".9" filter="url(#gf1)">
+            <animate attributeName="r" values="4;26;4" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".9;0;.9" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="280" cy="196" r="3.5" fill="#c05a20" opacity=".9"/>
+          <text x="14" y="332" fill="rgba(137,196,212,.2)" font-family="DM Mono,monospace" font-size="7" letter-spacing="1">12°57'S  38°37'W — Ilha de Bom Jesus dos Passos, Salvador BA</text>
+        </svg>
+      </div>
+      <div class="proj-cards reveal" style="transition-delay:.2s">
+        <div class="pcard">
+          <div class="pcard-n">~60%</div><div class="pcard-l">Cobertura original</div>
+          <div class="pcard-d">Do manguezal original sob pressão de desenvolvimento turístico desde os anos 1980.</div>
+          <div class="pill-row"><span class="pill">NDVI</span><span class="pill">Análise temporal</span></div>
+        </div>
+        <div class="pcard">
+          <div class="pcard-n">40+</div><div class="pcard-l">Anos analisados</div>
+          <div class="pcard-d">Imagens Landsat e Sentinel-2. Mapeamento contínuo de 1985 ao presente com GEE.</div>
+          <div class="pill-row"><span class="pill">Sentinel-2</span><span class="pill">Landsat</span></div>
+        </div>
+        <div class="pcard">
+          <div class="pcard-n">↩</div><div class="pcard-l">Objetivo</div>
+          <div class="pcard-d">Que a investigação regresse ao lugar e às comunidades que dependem do ecossistema.</div>
+          <div class="pill-row"><span class="pill">Ciência comunitária</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-desc reveal" style="transition-delay:.12s">
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">1985</div><div class="stat-l">Início da análise</div></div>
+        <div class="stat"><div class="stat-n">GEE</div><div class="stat-l">Plataforma principal</div></div>
+      </div>
+      <p>A Ilha de Bom Jesus dos Passos é onde cresci. O manguezal era o ecossistema do quintal — fonte de sustento para a comunidade de marisqueiros e pescadores da minha família.</p>
+      <div class="pull">"O satélite vê a perda de cobertura. Mas o que não aparece no mapa é o silêncio que ficou."</div>
+      <p>O projeto documenta a <strong>perda de cobertura de manguezal</strong> na ilha desde os anos 1980, correlacionando com dados de expansão urbana e desenvolvimento turístico. A metodologia usa Google Earth Engine com imagens multitemporais (Landsat TM, ETM+, OLI e Sentinel-2) para mapeamento de vegetação por NDVI.</p>
+      <p>O objetivo não é apenas produzir um mapa — é produzir <strong>evidência científica</strong> que possa ser usada pela comunidade, por órgãos ambientais e por políticas públicas para proteger o que resta.</p>
+      <p>Este projeto será futuramente <strong>correlacionado com a investigação de Waiheke</strong>, criando uma comparação entre dois ecossistemas costeiros insulares com diferentes histórias de pressão urbana.</p>
+      <div class="pill-row" style="margin-top:1.5rem;">
+        <span class="pill">Python</span><span class="pill">Google Earth Engine</span>
+        <span class="pill">Manguezal</span><span class="pill">Ecologia costeira</span><span class="pill">Sensoriamento remoto</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATUM -->
+<div class="stratum-divider" style="background:#111618;"><svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,20 Q360,75 720,45 Q1080,15 1440,60 L1440,80 L0,80 Z" fill="#0c0f0f"/></svg></div>
+
+<!-- PROJETO 02 — WAIHEKE -->
+<section class="waiheke-teaser" id="waiheke">
+  <div class="glow" style="width:600px;height:600px;background:rgba(74,154,176,.08);top:-100px;left:-200px;animation-delay:-8s;"></div>
+  <div class="section-label">Projeto 02 <span>— em desenvolvimento</span></div>
+  <div class="wt-inner">
+    <div class="reveal">
+      <div class="wt-badge">Em desenvolvimento</div>
+      <h2 class="wt-title">Waiheke<br><em>Island</em></h2>
+      <p style="font-size:.62rem;letter-spacing:.1em;color:var(--text-dim);margin-bottom:2rem;">36°47'S · 175°06'E · Auckland, Nova Zelândia</p>
+      <div class="wt-desc">
+        <p>Waiheke é uma ilha vulcânica no Golfo de Hauraki, com uma geologia notável — greywacke jurássico, vestígios de vulcanismo miocénico e uma costa jovem, formada nos últimos 7.000 anos após a subida do nível do mar.</p>
+        <p>A investigação aqui foca-se na <strong>biodiversidade costeira e intertidal</strong> da ilha — documentação de espécies em Palm Beach, Onetangi e Oneroa, com registo contínuo via iNaturalist.</p>
+        <div class="wt-connection">
+          <p>"Dois ecossistemas insulares costeiros. Uma floresta de manguezal tropical sob pressão urbana no Brasil. Uma costa vulcânica temperada com gestão ambiental activa na Nova Zelândia. O que é possível aprender comparando os dois?"</p>
+        </div>
+        <p>O projeto está a ser desenhado com o objetivo de <strong>correlacionar os dados de Waiheke com os de Bom Jesus</strong> — criando um estudo comparativo entre dois territórios insulares com histórias ecológicas e políticas completamente diferentes.</p>
+      </div>
+      <div class="pill-row" style="margin-top:1.5rem;">
+        <span class="pill">iNaturalist</span><span class="pill">Biodiversidade costeira</span>
+        <span class="pill">Geologia vulcânica</span><span class="pill">Em construção</span>
+      </div>
+    </div>
+
+    <div class="wt-vis reveal" style="transition-delay:.15s">
+      <div class="wt-map">
+        <svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+          <defs>
+            <radialGradient id="wOcean" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#0a1e30"/><stop offset="100%" stop-color="#050d18"/></radialGradient>
+          </defs>
+          <rect width="460" height="320" fill="url(#wOcean)"/>
+          <!-- Waiheke island shape (stylized) -->
+          <path d="M60,180 Q90,150 130,140 Q170,130 210,138 Q250,146 290,158 Q330,170 360,185 Q390,200 400,220 Q410,240 390,255 Q370,270 340,262 Q310,254 280,248 Q250,242 210,245 Q170,248 140,240 Q110,232 85,218 Q60,204 60,180 Z" fill="#1e3228" opacity=".95"/>
+          <path d="M75,180 Q102,153 140,143 Q178,133 215,141 Q252,149 290,162 Q328,175 355,190 Q382,205 390,222 Q398,239 378,252 Q358,265 328,257 Q298,249 265,243 Q232,237 198,240 Q164,243 136,235 Q108,227 86,213 Q64,199 75,180 Z" fill="#264535" opacity=".7"/>
+          <!-- Beaches / points of interest -->
+          <circle cx="120" cy="215" r="5" fill="#89c4d4" opacity=".8"/>
+          <text x="128" y="219" fill="#89c4d4" font-family="DM Mono,monospace" font-size="8" opacity=".7">Oneroa</text>
+          <circle cx="230" cy="248" r="5" fill="#89c4d4" opacity=".8"/>
+          <text x="238" y="252" fill="#89c4d4" font-family="DM Mono,monospace" font-size="8" opacity=".7">Onetangi</text>
+          <circle cx="330" cy="235" r="5" fill="#89c4d4" opacity=".8"/>
+          <text x="338" y="239" fill="#89c4d4" font-family="DM Mono,monospace" font-size="8" opacity=".7">Palm Beach</text>
+          <!-- Stony Batter (volcanic) -->
+          <circle cx="370" cy="188" r="4" fill="#c05a20" opacity=".7"/>
+          <text x="378" y="192" fill="#c05a20" font-family="DM Mono,monospace" font-size="7" opacity=".7">Stony Batter</text>
+          <!-- Auckland mainland suggestion -->
+          <path d="M0,0 Q30,20 0,60 L0,0 Z" fill="#162020" opacity=".5"/>
+          <path d="M460,0 Q430,15 460,45 L460,0 Z" fill="#162020" opacity=".3"/>
+          <!-- Water shimmer -->
+          <g fill="none" stroke="#4a9ab0" stroke-width=".5" opacity=".12">
+            <path d="M0,50 Q115,35 230,52 Q345,68 460,45"/>
+            <path d="M0,100 Q100,82 230,100 Q360,118 460,92"/>
+            <path d="M0,270 Q115,255 230,272 Q345,288 460,262"/>
+            <path d="M0,300 Q115,285 230,302 Q345,318 460,292"/>
+          </g>
+          <!-- Grid -->
+          <g opacity=".05" stroke="#89c4d4" stroke-width=".4">
+            <line x1="115" y1="0" x2="115" y2="320"/><line x1="230" y1="0" x2="230" y2="320"/>
+            <line x1="345" y1="0" x2="345" y2="320"/>
+            <line x1="0" y1="80" x2="460" y2="80"/><line x1="0" y1="160" x2="460" y2="160"/><line x1="0" y1="240" x2="460" y2="240"/>
+          </g>
+          <!-- Legend -->
+          <rect x="14" y="14" width="180" height="68" rx="2" fill="rgba(5,13,24,.88)" stroke="rgba(137,196,212,.12)" stroke-width=".5"/>
+          <circle cx="30" cy="32" r="4" fill="#89c4d4" opacity=".8"/><text x="42" y="36" fill="#5a8a9a" font-family="DM Mono,monospace" font-size="8">Praias monitorizadas</text>
+          <circle cx="30" cy="52" r="4" fill="#c05a20" opacity=".7"/><text x="42" y="56" fill="#5a8a9a" font-family="DM Mono,monospace" font-size="8">Formação vulcânica</text>
+          <text x="14" y="74" fill="#2a5a6a" font-family="DM Mono,monospace" font-size="7">Waiheke Island · Golfo de Hauraki</text>
+          <text x="14" y="308" fill="rgba(137,196,212,.18)" font-family="DM Mono,monospace" font-size="7" letter-spacing="1">36°47'S  175°06'E — Waiheke Island, Auckland NZ</text>
+        </svg>
+      </div>
+      <p style="font-size:.65rem;letter-spacing:.1em;color:var(--text-ghost);margin-top:1rem;text-align:center;">Mapa de monitorização · em construção</p>
+    </div>
+  </div>
+</section>
+
+<!-- STRATUM -->
+<div class="stratum-divider" style="background:#0c0f0f;"><svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,35 Q360,80 720,50 Q1080,18 1440,62 L1440,80 L0,80 Z" fill="#162020"/></svg></div>
+
+<!-- VOLUNTARIADOS -->
+<section class="vol-section">
+  <div class="section-label">Voluntariados <span>— envolvimento comunitário</span></div>
+  <div class="vol-placeholder reveal">
+    <div class="vol-icon">🌱</div>
+    <p class="vol-coming">Em construção</p>
+    <p class="vol-sub">Experiências de voluntariado em ecologia, conservação e ciência comunitária serão adicionadas aqui em breve.</p>
+  </div>
+</section>
+
+<!-- STRATUM -->
+<div class="stratum-divider" style="background:#162020;"><svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,50 Q400,10 720,40 Q1040,70 1440,25 L1440,80 L0,80 Z" fill="#0c0f0f"/></svg></div>
+
+<!-- CTA -->
+<section style="background:var(--basalt);padding:5rem 3rem;position:relative;z-index:10;">
+  <div class="reveal" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;">
+    <h2 style="font-family:var(--ff-serif);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;">Ver as <em style="font-style:italic;color:var(--glacier-mid);">notas de campo</em>.</h2>
+    <div style="display:flex;gap:.8rem;flex-wrap:wrap;">
+      <a href="fieldnotes.html" class="clink clink-primary">Field Notes</a>
+      <a href="contato.html" class="clink">Colaborar</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Adriane Santana Bulhões · Salvador, Bahia · Waiheke, NZ</p>
+  <span class="footer-element">Terra, água, ciência.</span>
+  <p>Ecossistemas costeiros · Ciências da Terra</p>
+</footer>
+<script>
+const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx-4+'px';dot.style.top=my-4+'px';});
+(function anim(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx-18+'px';ring.style.top=ry-18+'px';requestAnimationFrame(anim);})();
+const canvas=document.getElementById('bg-canvas'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const waves=[{y:.18,amp:55,freq:.0022,spd:.00012,off:0,col:'rgba(30,110,110,',a:.022},{y:.32,amp:70,freq:.0018,spd:.00009,off:2.1,col:'rgba(42,90,106,',a:.028},{y:.50,amp:80,freq:.0015,spd:.00007,off:4.3,col:'rgba(26,50,70,',a:.025},{y:.68,amp:65,freq:.0020,spd:.00011,off:1.2,col:'rgba(20,80,80,',a:.02},{y:.82,amp:50,freq:.0025,spd:.00014,off:3.5,col:'rgba(42,90,106,',a:.018},{y:.95,amp:40,freq:.0028,spd:.00016,off:5.8,col:'rgba(30,110,110,',a:.015}];
+function drawBg(t){ctx.clearRect(0,0,canvas.width,canvas.height);waves.forEach(w=>{ctx.beginPath();const base=canvas.height*w.y;ctx.moveTo(0,base);for(let x=0;x<=canvas.width;x+=5){const y=base+Math.sin(x*w.freq+t*w.spd*1000+w.off)*w.amp+Math.sin(x*w.freq*.7+t*w.spd*.8*1000+w.off+1)*w.amp*.3;ctx.lineTo(x,y);}ctx.lineTo(canvas.width,canvas.height);ctx.lineTo(0,canvas.height);ctx.closePath();ctx.fillStyle=w.col+w.a+')';ctx.fill();});requestAnimationFrame(drawBg);}
+requestAnimationFrame(drawBg);
+document.querySelectorAll('.reveal').forEach(r=>new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1}).observe(r));
+document.querySelectorAll('.lang-toggle button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}));
+</script>
+</body>
+</html>

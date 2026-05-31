@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Node / Astro (added when we scaffold)
+node_modules/
+dist/
+.astro/
+.output/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Local Claude Code settings (keep machine-specific config out of the repo)
+.claude/settings.local.json

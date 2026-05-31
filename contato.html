@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — Adriane Santana Bulhões</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-page { min-height:100vh; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:10; padding:10rem 3rem 7rem; overflow:hidden; }
+.contact-bg-text {
+  position:absolute; font-family:var(--ff-serif); font-size:22vw; font-weight:300;
+  color:rgba(200,232,240,.025); top:50%; left:50%; transform:translate(-50%,-50%);
+  white-space:nowrap; pointer-events:none; font-style:italic;
+}
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:7rem; align-items:start; position:relative; }
+.contact-left {}
+.contact-eyebrow { font-size:.55rem; letter-spacing:.32em; text-transform:uppercase; color:var(--lava-glow); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; }
+.contact-eyebrow::after { content:''; flex:1; max-width:60px; height:1px; background:linear-gradient(to right,var(--lava-glow),transparent); }
+.contact-title { font-family:var(--ff-serif); font-size:clamp(3rem,6vw,5.5rem); font-weight:300; line-height:.95; margin-bottom:1.5rem; }
+.contact-title em { font-style:italic; color:var(--glacier-mid); }
+.contact-sub { font-size:.85rem; color:var(--text-dim); max-width:400px; line-height:1.85; font-weight:300; margin-bottom:3rem; }
+
+/* LINK CARDS */
+.contact-cards { display:flex; flex-direction:column; gap:.8rem; }
+.contact-card {
+  display:flex; align-items:center; gap:1.2rem;
+  padding:1.4rem 1.6rem;
+  border:1px solid rgba(200,232,240,.08);
+  border-radius:3px; text-decoration:none;
+  color:var(--text-bright); transition:all .35s;
+  background:var(--obsidian);
+  position:relative; overflow:hidden;
+}
+.contact-card::before {
+  content:''; position:absolute; inset:0; left:-100%;
+  background:linear-gradient(to right,transparent,rgba(74,154,176,.08),transparent);
+  transition:left .5s ease;
+}
+.contact-card:hover::before { left:100%; }
+.contact-card:hover { border-color:rgba(200,232,240,.2); background:var(--deep-rock); }
+.contact-card.primary { background:var(--glacier-deep); border-color:var(--glacier-deep); }
+.contact-card.primary:hover { background:var(--glacier-mid); border-color:var(--glacier-mid); color:var(--basalt); }
+.cc-icon { width:36px; height:36px; border:1px solid rgba(200,232,240,.15); border-radius:2px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.contact-card.primary .cc-icon { border-color:rgba(12,15,15,.3); }
+.cc-label { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:inherit; opacity:.6; margin-bottom:.2rem; }
+.cc-value { font-size:.82rem; color:inherit; }
+
+/* STATUS / INFO RIGHT */
+.contact-right { padding-top:2rem; }
+.contact-status { margin-bottom:3rem; }
+.status-indicator { display:flex; align-items:center; gap:.7rem; margin-bottom:1rem; }
+.status-dot { width:8px; height:8px; border-radius:50%; background:var(--glacier-mid); box-shadow:0 0 12px rgba(138,196,212,.5); animation:statusPulse 2.5s ease-in-out infinite; }
+@keyframes statusPulse { 0%,100%{opacity:1;box-shadow:0 0 12px rgba(138,196,212,.5);} 50%{opacity:.5;box-shadow:0 0 6px rgba(138,196,212,.2);} }
+.status-text { font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:var(--glacier-mid); }
+.status-detail { font-size:.8rem; line-height:1.8; color:var(--text-dim); font-weight:300; }
+.status-detail strong { color:var(--glacier-pale); font-weight:400; }
+
+.interest-list { margin-bottom:3rem; }
+.interest-title { font-size:.55rem; letter-spacing:.28em; text-transform:uppercase; color:var(--lava-glow); margin-bottom:1.2rem; }
+.interest-item { display:flex; align-items:flex-start; gap:.8rem; margin-bottom:.8rem; }
+.interest-item::before { content:'→'; color:var(--glacier-deep); font-size:.7rem; margin-top:.1rem; flex-shrink:0; }
+.interest-item p { font-size:.8rem; line-height:1.6; color:var(--text-dim); font-weight:300; }
+.interest-item p strong { color:var(--text-mid); font-weight:400; }
+
+.location-now { padding:1.5rem; background:var(--deep-rock); border-left:2px solid var(--glacier-deep); border-radius:0 2px 2px 0; }
+.location-now p { font-size:.7rem; letter-spacing:.08em; color:var(--text-dim); line-height:1.9; }
+.location-now strong { color:var(--glacier-pale); font-weight:400; display:block; font-size:.82rem; margin-bottom:.4rem; }
+
+/* GEOLOGICAL SIGNATURE */
+.geo-sig { position:absolute; bottom:3rem; right:3rem; text-align:right; }
+.geo-sig p { font-size:.55rem; letter-spacing:.15em; text-transform:uppercase; color:var(--text-ghost); line-height:2; }
+.geo-sig .coords { font-family:var(--ff-serif); font-style:italic; font-size:.9rem; color:var(--text-ghost); }
+
+@media (max-width:900px) {
+  .contact-grid { grid-template-columns:1fr; gap:3.5rem; }
+  .contact-page { padding:8rem 1.5rem 5rem; }
+  .geo-sig { position:static; text-align:left; margin-top:3rem; }
+}
+</style>
+</head>
+<body>
+<div id="cur-dot"></div><div id="cur-ring"></div>
+<div class="grain"></div><canvas id="bg-canvas"></canvas>
+<div class="tectonic">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#89c4d4" stroke-width=".6" fill="none">
+      <path d="M-100,200 Q200,175 450,210 Q700,245 900,195 Q1100,148 1350,218 Q1480,250 1600,205"/>
+      <path d="M-100,600 Q200,572 450,608 Q700,642 900,592 Q1100,545 1350,618 Q1480,650 1600,605"/>
+    </g>
+    <line x1="720" y1="0" x2="680" y2="900" stroke="#c05a20" stroke-width=".8" stroke-dasharray="12 8" opacity=".35"/>
+  </svg>
+</div>
+<nav>
+  <a href="index.html" class="nav-logo">Adriane S<span>.</span> Bulhões</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="projetos.html">Projetos</a></li>
+      <li><a href="fieldnotes.html">Field Notes</a></li>
+      <li><a href="contato.html" class="active">Contacto</a></li>
+    </ul>
+    <div class="lang-toggle"><button class="active">PT</button><button>EN</button></div>
+  </div>
+</nav>
+
+<main>
+<div class="contact-page">
+  <div class="contact-bg-text">conversar</div>
+  <div class="glow" style="width:700px;height:700px;background:rgba(74,154,176,.08);top:-200px;right:-250px;animation-delay:-6s;"></div>
+  <div class="glow" style="width:400px;height:400px;background:rgba(192,90,32,.05);bottom:-100px;left:-100px;animation-delay:-15s;"></div>
+
+  <div class="contact-grid">
+    <!-- LEFT -->
+    <div class="contact-left reveal">
+      <div class="contact-eyebrow">Contacto</div>
+      <h1 class="contact-title">Vamos<br><em>conversar</em>.</h1>
+      <p class="contact-sub">Candidaturas a mestrado, colaborações científicas, questões sobre os projetos ou sobre ecossistemas costeiros. Qualquer assunto relacionado com o trabalho é bem-vindo.</p>
+
+      <div class="contact-cards">
+        <a href="mailto:adriane@email.com" class="contact-card primary">
+          <div class="cc-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+          </div>
+          <div>
+            <div class="cc-label">Email</div>
+            <div class="cc-value">adriane@email.com</div>
+          </div>
+        </a>
+        <a href="#" class="contact-card">
+          <div class="cc-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="cc-label">LinkedIn</div>
+            <div class="cc-value">linkedin.com/in/adriane-bulhões</div>
+          </div>
+        </a>
+        <a href="#" class="contact-card">
+          <div class="cc-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <div>
+            <div class="cc-label">iNaturalist</div>
+            <div class="cc-value">inaturalist.org/people/adriane</div>
+          </div>
+        </a>
+        <a href="#" class="contact-card">
+          <div class="cc-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div>
+            <div class="cc-label">Currículo</div>
+            <div class="cc-value">Descarregar CV — PDF</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="contact-right reveal" style="transition-delay:.15s">
+      <div class="contact-status">
+        <div class="status-indicator">
+          <div class="status-dot"></div>
+          <span class="status-text">Disponível para contacto</span>
+        </div>
+        <p class="status-detail">
+          Localizada em <strong>Waiheke Island, Nova Zelândia</strong> (UTC+12).<br>
+          A preparar candidatura a <strong>mestrado em ecossistemas costeiros</strong>.<br>
+          Aberta a colaborações, parcerias de investigação e conversas sobre ciência.
+        </p>
+      </div>
+
+      <div class="interest-list">
+        <p class="interest-title">Interesses de colaboração</p>
+        <div class="interest-item"><p><strong>Ecologia de manguezal</strong> — investigação, monitorização ou projetos de conservação em zonas costeiras tropicais.</p></div>
+        <div class="interest-item"><p><strong>Sensoriamento remoto</strong> — análise temporal de cobertura vegetal, mudanças de uso do solo, mapeamento por satélite.</p></div>
+        <div class="interest-item"><p><strong>Ciência comunitária</strong> — projetos que envolvem populações costeiras na produção ou validação de dados ambientais.</p></div>
+        <div class="interest-item"><p><strong>Candidaturas a mestrado/doutoramento</strong> — orientadores ou programas em ecossistemas costeiros e ciências da terra.</p></div>
+      </div>
+
+      <div class="location-now">
+        <p>
+          <strong>Localização atual</strong>
+          Waiheke Island, Auckland, Nova Zelândia<br>
+          36°47'S · 175°06'E<br><br>
+          Origem: Salvador, Bahia, Brasil<br>
+          12°57'S · 38°37'W
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="geo-sig">
+    <p class="coords">Terra · água · ciência</p>
+    <p>Adriane Santana Bulhões · 2025</p>
+  </div>
+</div>
+</main>
+
+<footer>
+  <p>Adriane Santana Bulhões · Salvador, Bahia · Waiheke, NZ</p>
+  <span class="footer-element">Terra, água, ciência.</span>
+  <p>Ecossistemas costeiros · Ciências da Terra</p>
+</footer>
+<script>
+const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx-4+'px';dot.style.top=my-4+'px';});
+(function anim(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx-18+'px';ring.style.top=ry-18+'px';requestAnimationFrame(anim);})();
+const canvas=document.getElementById('bg-canvas'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const waves=[{y:.18,amp:55,freq:.0022,spd:.00012,off:0,col:'rgba(30,110,110,',a:.022},{y:.32,amp:70,freq:.0018,spd:.00009,off:2.1,col:'rgba(42,90,106,',a:.028},{y:.50,amp:80,freq:.0015,spd:.00007,off:4.3,col:'rgba(26,50,70,',a:.025},{y:.68,amp:65,freq:.0020,spd:.00011,off:1.2,col:'rgba(20,80,80,',a:.02},{y:.82,amp:50,freq:.0025,spd:.00014,off:3.5,col:'rgba(42,90,106,',a:.018},{y:.95,amp:40,freq:.0028,spd:.00016,off:5.8,col:'rgba(30,110,110,',a:.015}];
+function drawBg(t){ctx.clearRect(0,0,canvas.width,canvas.height);waves.forEach(w=>{ctx.beginPath();const base=canvas.height*w.y;ctx.moveTo(0,base);for(let x=0;x<=canvas.width;x+=5){const y=base+Math.sin(x*w.freq+t*w.spd*1000+w.off)*w.amp+Math.sin(x*w.freq*.7+t*w.spd*.8*1000+w.off+1)*w.amp*.3;ctx.lineTo(x,y);}ctx.lineTo(canvas.width,canvas.height);ctx.lineTo(0,canvas.height);ctx.closePath();ctx.fillStyle=w.col+w.a+')';ctx.fill();});requestAnimationFrame(drawBg);}
+requestAnimationFrame(drawBg);
+document.querySelectorAll('.reveal').forEach(r=>new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1}).observe(r));
+document.querySelectorAll('.lang-toggle button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}));
+</script>
+</body>
+</html>
