@@ -1,0 +1,71 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjetoVisual from './ProjetoVisual.astro';
+
+interface Props {
+  projeto: CollectionEntry<'projetos'>;
+  index?: number;
+}
+const { projeto, index = 0 } = Astro.props;
+const { title, subtitle, eyebrow, coords, summary, status, visual, cover } = projeto.data;
+const href = `/projetos/${projeto.id}`;
+const statusClass = status.replace(/\s+/g, '-');
+const delay = index ? `transition-delay:${Math.min(index, 4) * 0.1}s` : undefined;
+---
+
+<a class="pteaser reveal" href={href} style={delay}>
+  <div class="pteaser-vis">
+    <ProjetoVisual visual={visual} cover={cover} alt={title} />
+  </div>
+  <div class="pteaser-body">
+    <span class:list={['status-badge', statusClass]}>{status}</span>
+    {eyebrow && <div class="pteaser-eyebrow">{eyebrow}</div>}
+    <h2 class="pteaser-title">{title}{subtitle && <em> {subtitle}</em>}</h2>
+    {coords && <p class="pteaser-coords">{coords}</p>}
+    {summary && <p class="pteaser-summary">{summary}</p>}
+    <span class="pteaser-link">Ver projeto</span>
+  </div>
+</a>
+
+<style>
+  .pteaser {
+    display: flex;
+    flex-direction: column;
+    background: var(--obsidian);
+    border: 1px solid rgba(200, 232, 240, 0.06);
+    border-radius: 3px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .pteaser:hover { background: var(--deep-rock); border-color: rgba(200, 232, 240, 0.16); }
+
+  .pteaser-vis { height: 200px; overflow: hidden; flex-shrink: 0; }
+  .pteaser-body { padding: 2rem; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
+
+  .status-badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.52rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.32em 0.8em;
+    border-radius: 2px;
+  }
+  .status-badge::before { content: '●'; font-size: 0.4rem; }
+  .status-badge.em-desenvolvimento { color: var(--lava-bright); border: 1px solid rgba(224, 112, 48, 0.3); }
+  .status-badge.concluído { color: var(--glacier-mid); border: 1px solid rgba(138, 196, 212, 0.3); }
+  .status-badge.planeado { color: var(--text-dim); border: 1px solid rgba(143, 176, 189, 0.25); }
+
+  .pteaser-eyebrow { font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--lava-glow); }
+  .pteaser-title { font-family: var(--ff-serif); font-size: 1.9rem; font-weight: 300; line-height: 1; color: var(--glacier-pale); }
+  .pteaser-title em { font-style: italic; color: var(--mineral-pale); }
+  .pteaser-coords { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--text-dim); }
+  .pteaser-summary { font-size: 0.82rem; line-height: 1.7; color: #6a9aaa; font-weight: 300; flex: 1; }
+  .pteaser-link { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--glacier-deep); margin-top: 0.5rem; transition: color 0.3s; }
+  .pteaser-link::after { content: ' →'; }
+  .pteaser:hover .pteaser-link { color: var(--glacier-pale); }
+</style>
