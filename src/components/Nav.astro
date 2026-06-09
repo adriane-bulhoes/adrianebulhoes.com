@@ -1,10 +1,4 @@
 ---
-/**
- * Fixed top navigation: logo, page links (with active state), and the PT/EN
- * toggle island. Active link derived from the current path.
- */
-import LangToggle from './LangToggle.tsx';
-
 const links = [
   { href: '/sobre', label: 'Sobre' },
   { href: '/projetos', label: 'Projetos' },
@@ -26,6 +20,5 @@ const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
         </li>
       ))}
     </ul>
-    <LangToggle client:idle />
   </div>
 </nav>
