@@ -47,8 +47,8 @@ export default function WaveCanvas() {
         for (let x = 0; x <= canvas.width; x += 5) {
           const y =
             base +
-            Math.sin(x * w.freq + t * w.spd * 1000 + w.off) * w.amp +
-            Math.sin(x * w.freq * 0.7 + t * w.spd * 0.8 * 1000 + w.off + 1) * w.amp * 0.3;
+            Math.sin(x * w.freq + t * w.spd + w.off) * w.amp +
+            Math.sin(x * w.freq * 0.7 + t * w.spd * 0.8 + w.off + 1) * w.amp * 0.3;
           ctx.lineTo(x, y);
         }
         ctx.lineTo(canvas.width, canvas.height);

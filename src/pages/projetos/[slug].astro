@@ -6,7 +6,7 @@ import StratumDivider from '../../components/StratumDivider.astro';
 import ProjetoCard from '../../components/ProjetoCard.astro';
 
 export const getStaticPaths = (async () => {
-  const projetos = await getCollection('projetos');
+  const projetos = await getCollection('projetos', ({ data }) => data.lang !== 'en');
   return projetos.map((projeto) => ({ params: { slug: projeto.id }, props: { projeto } }));
 }) satisfies GetStaticPaths;
 
@@ -15,9 +15,9 @@ const { title, subtitle, summary } = projeto.data;
 const heading = subtitle ? `${title} ${subtitle}` : title;
 ---
 
-<BaseLayout title={`${heading} — Projetos`} description={summary ?? heading}>
+<BaseLayout title={`${heading} — Projectos`} description={summary ?? heading}>
   <div class="proj-detail-top">
-    <a href="/projetos" class="back-link">Projetos</a>
+    <a href="/projetos" class="back-link">Projectos</a>
   </div>
 
   <ProjetoCard projeto={projeto} compact />

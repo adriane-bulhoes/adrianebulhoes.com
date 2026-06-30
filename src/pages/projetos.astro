@@ -5,27 +5,28 @@ import StratumDivider from '../components/StratumDivider.astro';
 import ProjetoTeaserCard from '../components/ProjetoTeaserCard.astro';
 
 const projetos = (
-  await getCollection('projetos', ({ data }) => (import.meta.env.PROD ? !data.draft : true))
+  await getCollection('projetos', ({ data }) => data.lang !== 'en' && (import.meta.env.PROD ? !data.draft : true))
 ).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="Projetos — Adriane Santana Bulhões" description="Dois territórios, uma mesma pergunta sobre pressão e resistência dos ecossistemas costeiros.">
+<BaseLayout title="Projectos — Adriane Bulhões" description="Três territórios. Brasil, Portugal e Nova Zelândia, entre a geologia, a ecologia costeira e a detecção remota.">
   <!-- HERO -->
   <section class="proj-hero">
     <div class="glow" style="width:650px;height:650px;background:rgba(184,146,42,.07);top:-150px;right:-200px;animation-delay:-5s;"></div>
     <div class="glow" style="width:400px;height:400px;background:rgba(74,154,176,.07);bottom:0;left:5%;animation-delay:-12s;"></div>
     <div class="page-hero-eyebrow">Investigação</div>
-    <h1 class="page-hero-title">Projetos<br /><em>em curso</em></h1>
-    <p class="page-hero-sub">Dois territórios. Uma mesma pergunta sobre pressão, perda e resistência dos ecossistemas costeiros.</p>
+    <h1 class="page-hero-title">Investigação<br /><em>em curso</em></h1>
+    <p class="page-hero-sub">Três territórios. Brasil, Portugal e Nova Zelândia, entre a geologia, a ecologia costeira e a detecção remota.</p>
   </section>
 
   <StratumDivider fill="#111618" />
 
   <!-- LISTING -->
   <section class="proj-list">
-    <div class="section-label">Projetos <span>— investigação</span></div>
+    <div class="section-label">Projectos <span>investigação</span></div>
+    <p class="proj-narrative reveal">Três ilhas, três continentes, três trajectórias ecológicas. No Brasil, a perda de mangue numa ilha de pescadores. Em Portugal, a floresta consumida pelo fogo num clima cada vez mais quente e seco. Na Nova Zelândia, a recuperação de vegetação nativa graças a programas de restauro. Em conjunto mostram que a detecção remota, com Google Earth Engine e Python, torna visível e mensurável tanto a perda como a recuperação.</p>
     {projetos.length === 0 ? (
-      <p class="proj-empty-note">Ainda não há projetos publicados — em breve.</p>
+      <p class="proj-empty-note">Ainda não há projectos publicados.</p>
     ) : (
       <div class="proj-grid">
         {projetos.map((projeto, i) => <ProjetoTeaserCard projeto={projeto} index={i} />)}
@@ -60,6 +61,7 @@ const projetos = (
   }
 
   .proj-list { background: var(--obsidian); padding: 6rem 3rem 7rem; position: relative; z-index: 10; }
+  .proj-narrative { max-width: 720px; font-size: 0.88rem; line-height: 1.9; color: #6a9aaa; font-weight: 300; margin: 2.5rem 0 3rem; }
   .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1rem; }
   .proj-empty-note { color: var(--text-dim); font-style: italic; font-family: var(--ff-serif); font-size: 1.2rem; }
 

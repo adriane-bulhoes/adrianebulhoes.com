@@ -18,6 +18,7 @@ const fieldnotes = defineCollection({
       cover: image().optional(),
       excerpt: z.string().optional(),
       draft: z.boolean().default(false),
+      lang: z.enum(['pt', 'en']).default('pt'),
     }),
 });
 
@@ -34,7 +35,8 @@ const projetos = defineCollection({
       eyebrow: z.string().optional(),
       coords: z.string().optional(),
       summary: z.string().optional(),
-      status: z.enum(['em desenvolvimento', 'concluído', 'planeado']),
+      status: z.enum(['em desenvolvimento', 'concluído', 'planeado', 'in development', 'completed', 'planned']),
+      lang: z.enum(['pt', 'en']).default('pt'),
       order: z.number().default(0),
       stats: z
         .array(z.object({ value: z.string(), label: z.string() }))

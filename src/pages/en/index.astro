@@ -1,17 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import StratumDivider from '../components/StratumDivider.astro';
-import { monthYear } from '../lib/format-date';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StratumDivider from '../../components/StratumDivider.astro';
+import { monthYearEN } from '../../lib/format-date';
 
 const latestNotes = (
-  await getCollection('fieldnotes', ({ data }) => data.lang !== 'en' && (import.meta.env.PROD ? !data.draft : true))
+  await getCollection('fieldnotes', ({ data }) => data.lang === 'en' && (import.meta.env.PROD ? !data.draft : true))
 )
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 ---
 
-<BaseLayout title="Adriane Bulhões — Investigadora em Ciências da Terra">
+<BaseLayout title="Adriane Bulhões — Earth Sciences Researcher" lang="en" description="Earth sciences researcher. Geology, ocean and remote sensing, from the rocks of Bahia to the volcanic coasts of Oceania.">
   <!-- HERO -->
   <section class="hero">
     <div class="strata" aria-hidden="true">
@@ -41,17 +41,17 @@ const latestNotes = (
       <strong>37°S · 175°E</strong>Waiheke Island, NZ<br /><br />
       <strong>12°57'S · 38°37'W</strong>Salvador, Bahia, BR
     </div>
-    <div class="hero-eyebrow">Investigadora em Ciências da Terra</div>
+    <div class="hero-eyebrow">Earth Sciences Researcher</div>
     <h1 class="hero-name">Adriane<br />Bul<span class="lava">hões</span></h1>
-    <p class="hero-sub">Geologia. Oceano. Detecção remota.<br />Das rochas da Bahia às costas vulcânicas da Oceania.<br />Ciências da Terra e do ambiente, entre o campo e o satélite.</p>
+    <p class="hero-sub">Geology. Ocean. Remote sensing.<br />From the rocks of Bahia to the volcanic coasts of Oceania.<br />Earth and environmental sciences, between the field and the satellite.</p>
     <div class="hero-tags">
-      <span class="tag tag-solid">Ciências da Terra</span>
-      <span class="tag tag-outline">Geologia</span>
-      <span class="tag tag-outline">Detecção Remota</span>
+      <span class="tag tag-solid">Earth Sciences</span>
+      <span class="tag tag-outline">Geology</span>
+      <span class="tag tag-outline">Remote Sensing</span>
       <span class="tag tag-outline">Google Earth Engine</span>
-      <span class="tag tag-lava">MSc em construção</span>
+      <span class="tag tag-lava">MSc in progress</span>
     </div>
-    <div class="scroll-hint">Explorar</div>
+    <div class="scroll-hint">Explore</div>
   </section>
 
   <StratumDivider fill="#111618" accent />
@@ -59,20 +59,20 @@ const latestNotes = (
   <!-- INTRO -->
   <div class="intro-strip">
     <div class="reveal">
-      <h2 class="intro-quote">Cresci entre raízes e <em>maré</em>.</h2>
+      <h2 class="intro-quote">I grew up between roots and <em>tide</em>.</h2>
     </div>
     <div class="intro-body reveal" style="transition-delay:.12s">
-      <p>Cresci entre Salvador e a Ilha de Bom Jesus dos Passos, numa família de <strong>marisqueiros e pescadores</strong>. O oceano veio primeiro. A geologia veio por conta própria, logo a seguir.</p>
-      <p>Vivo agora em Waiheke Island, na Nova Zelândia, onde a geologia vulcânica costeira me dá uma nova forma de ver as mesmas perguntas. Três países. Três relações diferentes entre uma comunidade e o seu ambiente.</p>
-      <a href="/sobre" class="intro-cta">Conhecer a minha história</a>
+      <p>I grew up between Salvador and the Island of Bom Jesus dos Passos, in a family of <strong>shellfish gatherers and fishers</strong>. The ocean came first. Geology came on its own, shortly after.</p>
+      <p>I now live on Waiheke Island, in New Zealand, where the coastal volcanic geology gives me a new way of looking at the same questions. Three countries. Three different relationships between a community and its environment.</p>
+      <a href="/en/about" class="intro-cta">Learn my story</a>
     </div>
   </div>
 
   <StratumDivider fill="#162020" bg="#111618" />
 
-  <!-- PROJETO TEASER -->
+  <!-- FEATURED PROJECT -->
   <div class="projeto-teaser">
-    <div class="section-label">Projecto em destaque <span>investigação</span></div>
+    <div class="section-label">Featured project <span>research</span></div>
     <div class="teaser-grid">
       <div class="teaser-vis reveal">
         <svg viewBox="0 0 580 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
@@ -93,8 +93,6 @@ const latestNotes = (
           <ellipse cx="200" cy="155" rx="30" ry="15" fill="#0d3a22" opacity=".9" />
           <ellipse cx="238" cy="138" rx="24" ry="12" fill="#0d3a22" opacity=".85" />
           <ellipse cx="282" cy="132" rx="20" ry="10" fill="#2a5038" opacity=".5" />
-          <rect x="240" y="115" width="18" height="12" rx="1" fill="#8a4010" opacity=".7" />
-          <rect x="265" y="110" width="14" height="10" rx="1" fill="#8a4010" opacity=".6" />
           <g opacity=".1" stroke="#89c4d4" stroke-width=".5">
             <line x1="100" y1="0" x2="100" y2="280" /><line x1="200" y1="0" x2="200" y2="280" />
             <line x1="300" y1="0" x2="300" y2="280" /><line x1="400" y1="0" x2="400" y2="280" />
@@ -106,59 +104,58 @@ const latestNotes = (
             <animate attributeName="opacity" values=".9;0;.9" dur="3s" repeatCount="indefinite" />
           </circle>
           <circle cx="255" cy="152" r="3.5" fill="#c05a20" opacity=".9" />
-          <text x="14" y="270" fill="rgba(137,196,212,.2)" font-family="DM Mono,monospace" font-size="7" letter-spacing="1">12°57'S  38°37'W · Ilha de Bom Jesus dos Passos</text>
+          <text x="14" y="270" fill="rgba(137,196,212,.2)" font-family="DM Mono,monospace" font-size="7" letter-spacing="1">12°57'S  38°37'W · Island of Bom Jesus dos Passos</text>
         </svg>
       </div>
       <div class="teaser-right reveal" style="transition-delay:.15s">
-        <div class="teaser-label">Investigação principal</div>
+        <div class="teaser-label">Main research</div>
         <h2 class="teaser-title">Bom Jesus<br /><em>dos Passos</em></h2>
-        <p class="teaser-desc">Análise temporal da perda de cobertura de manguezal na Ilha de Bom Jesus dos Passos, Salvador, o lugar onde cresci. Mapeamento por satélite (Google Earth Engine) de 1985 ao presente.</p>
+        <p class="teaser-desc">Temporal analysis of mangrove cover loss on the Island of Bom Jesus dos Passos, Salvador, the place where I grew up. Satellite mapping (Google Earth Engine) from 1985 to the present.</p>
         <div class="teaser-stat">
-          <div class="stat-item"><div class="stat-num">~60%</div><div class="stat-label">Cobertura original sob pressão</div></div>
-          <div class="stat-item"><div class="stat-num">40+</div><div class="stat-label">Anos de análise temporal</div></div>
+          <div class="stat-item"><div class="stat-num">~60%</div><div class="stat-label">Original cover under pressure</div></div>
+          <div class="stat-item"><div class="stat-num">40+</div><div class="stat-label">Years of temporal analysis</div></div>
         </div>
-        <a href="/projetos" class="intro-cta">Ver projectos completos</a>
+        <a href="/en/projects" class="intro-cta">See full projects</a>
       </div>
     </div>
   </div>
 
   <StratumDivider fill="#111618" bg="#162020" />
 
-  <!-- FIELD NOTES TEASER (placeholder — wired to the collection in T025) -->
+  <!-- FIELD NOTES TEASER -->
   <div class="fn-teaser">
-    <div class="section-label">Field Notes <span>últimas entradas</span></div>
+    <div class="section-label">Field Notes <span>latest entries</span></div>
     <div class="fn-grid">
       {latestNotes.map((note, i) => (
-        <a class="fn-card reveal" href={`/fieldnotes/${note.id}`} style={i ? `transition-delay:${i * 0.1}s` : undefined}>
-          <div class="fn-date">{monthYear(note.data.date)}</div>
+        <a class="fn-card reveal" href={`/en/field-notes/${note.id}`} style={i ? `transition-delay:${i * 0.1}s` : undefined}>
+          <div class="fn-date">{monthYearEN(note.data.date)}</div>
           <div class="fn-loc">◎ {note.data.location}</div>
           <p class="fn-excerpt">{note.data.excerpt ?? note.data.title}</p>
           <div class="fn-tag">{note.data.tags.slice(0, 2).join(' · ')}</div>
         </a>
       ))}
     </div>
-    <div style="margin-top:2rem;"><a href="/fieldnotes" class="intro-cta">Ler todas as entradas</a></div>
+    <div style="margin-top:2rem;"><a href="/en/field-notes" class="intro-cta">Read all entries</a></div>
   </div>
 
   <StratumDivider fill="#0a0e0f" bg="#111618" />
 
-  <!-- CONTACTO MINI -->
+  <!-- CONTACT MINI -->
   <section class="contato-mini">
     <div class="reveal contato-row">
       <div>
-        <p class="contato-eyebrow">Contacto</p>
-        <h2 class="contato-title">Vamos <em>conversar</em>.</h2>
+        <p class="contato-eyebrow">Contact</p>
+        <h2 class="contato-title">Let's <em>talk</em>.</h2>
       </div>
       <div class="contato-actions">
         <a href="mailto:adrianebulhoes1@gmail.com" class="clink clink-primary">Email</a>
-        <a href="/contato" class="clink">Ver todas as formas</a>
+        <a href="/en/contact" class="clink">See all options</a>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  /* ---- HERO ---- */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -225,7 +222,6 @@ const latestNotes = (
     transform: translateY(24px);
     animation: fadeUp 0.9s ease forwards 0.45s;
   }
-  .hero-name em { font-style: italic; color: var(--glacier-mid); font-weight: 300; }
   .hero-name .lava { color: var(--lava-bright); }
   .hero-sub {
     font-family: var(--ff-serif);
@@ -247,13 +243,7 @@ const latestNotes = (
     transform: translateY(16px);
     animation: fadeUp 0.8s ease forwards 0.75s;
   }
-  .tag {
-    font-size: 0.6rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 0.42em 1.1em;
-    border-radius: 2px;
-  }
+  .tag { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.42em 1.1em; border-radius: 2px; }
   .tag-solid { background: var(--glacier-deep); color: var(--basalt); }
   .tag-outline { border: 1px solid rgba(200, 232, 240, 0.22); color: var(--text-mid); }
   .tag-lava { border: 1px solid rgba(192, 90, 32, 0.4); color: var(--lava-bright); }
@@ -278,165 +268,46 @@ const latestNotes = (
     background: linear-gradient(to bottom, var(--text-dim), transparent);
     animation: scrollDrop 2.2s ease-in-out infinite;
   }
-  @keyframes scrollDrop {
-    0%, 100% { transform: scaleY(1); opacity: 0.7; }
-    50% { transform: scaleY(0.4); opacity: 0.15; }
-  }
+  @keyframes scrollDrop { 0%, 100% { transform: scaleY(1); opacity: 0.7; } 50% { transform: scaleY(0.4); opacity: 0.15; } }
 
-  /* ---- INTRO STRIP ---- */
-  .intro-strip {
-    background: var(--obsidian);
-    padding: 5rem 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    position: relative;
-    z-index: 10;
-  }
-  .intro-quote {
-    font-family: var(--ff-serif);
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
-    font-weight: 300;
-    line-height: 1.15;
-  }
+  .intro-strip { background: var(--obsidian); padding: 5rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 10; }
+  .intro-quote { font-family: var(--ff-serif); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.15; }
   .intro-quote em { font-style: italic; color: var(--glacier-mid); }
-  .intro-body p {
-    font-size: 0.88rem;
-    line-height: 1.95;
-    color: #6a9aaa;
-    margin-bottom: 1.2rem;
-    font-weight: 300;
-  }
+  .intro-body p { font-size: 0.88rem; line-height: 1.95; color: #6a9aaa; margin-bottom: 1.2rem; font-weight: 300; }
   .intro-body p strong { color: var(--glacier-pale); font-weight: 400; }
   .intro-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-top: 1.5rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--glacier-deep);
-    text-decoration: none;
-    transition: color 0.3s;
+    display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem;
+    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--glacier-deep); text-decoration: none; transition: color 0.3s;
   }
   .intro-cta::after { content: '→'; transition: transform 0.3s; }
   .intro-cta:hover { color: var(--glacier-pale); }
   .intro-cta:hover::after { transform: translateX(4px); }
 
-  /* ---- PROJETO TEASER ---- */
-  .projeto-teaser {
-    background: var(--deep-rock);
-    padding: 7rem 3rem;
-    position: relative;
-    z-index: 10;
-    overflow: hidden;
-  }
+  .projeto-teaser { background: var(--deep-rock); padding: 7rem 3rem; position: relative; z-index: 10; overflow: hidden; }
   .teaser-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: center; }
-  .teaser-vis {
-    width: 100%;
-    height: 280px;
-    border-radius: 3px;
-    overflow: hidden;
-    position: relative;
-    background: var(--obsidian);
-  }
-  .teaser-label {
-    font-size: 0.55rem;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--lava-glow);
-    margin-bottom: 1.2rem;
-  }
-  .teaser-title {
-    font-family: var(--ff-serif);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 1.2rem;
-  }
+  .teaser-vis { width: 100%; height: 280px; border-radius: 3px; overflow: hidden; position: relative; background: var(--obsidian); }
+  .teaser-label { font-size: 0.55rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--lava-glow); margin-bottom: 1.2rem; }
+  .teaser-title { font-family: var(--ff-serif); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1; margin-bottom: 1.2rem; }
   .teaser-title em { font-style: italic; color: var(--mineral-pale); }
-  .teaser-desc {
-    font-size: 0.82rem;
-    line-height: 1.85;
-    color: var(--text-dim);
-    font-weight: 300;
-    margin-bottom: 2rem;
-  }
+  .teaser-desc { font-size: 0.82rem; line-height: 1.85; color: var(--text-dim); font-weight: 300; margin-bottom: 2rem; }
   .teaser-stat { display: flex; gap: 2.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
-  .stat-num {
-    font-family: var(--ff-serif);
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: var(--mineral-pale);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.55rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-top: 0.2rem;
-  }
+  .stat-num { font-family: var(--ff-serif); font-size: 2.2rem; font-weight: 300; color: var(--mineral-pale); line-height: 1; }
+  .stat-label { font-size: 0.55rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.2rem; }
 
-  /* ---- FIELD NOTES TEASER ---- */
-  .fn-teaser {
-    background: var(--obsidian);
-    padding: 7rem 3rem;
-    position: relative;
-    z-index: 10;
-  }
-  .fn-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: rgba(200, 232, 240, 0.06);
-    border: 1px solid rgba(200, 232, 240, 0.06);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .fn-card {
-    background: var(--obsidian);
-    padding: 2.2rem;
-    transition: background 0.3s;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-  }
+  .fn-teaser { background: var(--obsidian); padding: 7rem 3rem; position: relative; z-index: 10; }
+  .fn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(200, 232, 240, 0.06); border: 1px solid rgba(200, 232, 240, 0.06); border-radius: 3px; overflow: hidden; }
+  .fn-card { background: var(--obsidian); padding: 2.2rem; transition: background 0.3s; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
   .fn-card:hover { background: var(--deep-rock); }
   .fn-date { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--glacier-deep); margin-bottom: 0.6rem; }
   .fn-loc { font-size: 0.6rem; letter-spacing: 0.12em; color: var(--text-dim); margin-bottom: 1rem; }
   .fn-excerpt { font-family: var(--ff-serif); font-style: italic; font-size: 1.05rem; color: var(--text-mid); line-height: 1.5; flex: 1; }
   .fn-tag { font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lava-glow); margin-top: 1.2rem; }
 
-  /* ---- CONTACTO MINI ---- */
-  .contato-mini {
-    background: var(--basalt);
-    padding: 5rem 3rem;
-    position: relative;
-    z-index: 10;
-  }
-  .contato-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
-  .contato-eyebrow {
-    font-size: 0.55rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--lava-glow);
-    margin-bottom: 0.8rem;
-  }
-  .contato-title {
-    font-family: var(--ff-serif);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
-  }
+  .contato-mini { background: var(--basalt); padding: 5rem 3rem; position: relative; z-index: 10; }
+  .contato-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+  .contato-eyebrow { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--lava-glow); margin-bottom: 0.8rem; }
+  .contato-title { font-family: var(--ff-serif); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; }
   .contato-title em { font-style: italic; color: var(--glacier-mid); }
   .contato-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
 

@@ -1,17 +1,58 @@
 ---
-const links = [
+const isEN = Astro.url.pathname.startsWith('/en');
+
+const ptLinks = [
   { href: '/sobre', label: 'Sobre' },
-  { href: '/projetos', label: 'Projetos' },
+  { href: '/projetos', label: 'Projectos' },
   { href: '/fieldnotes', label: 'Field Notes' },
   { href: '/contato', label: 'Contacto' },
 ];
 
+const enLinks = [
+  { href: '/en/about', label: 'About' },
+  { href: '/en/projects', label: 'Projects' },
+  { href: '/en/field-notes', label: 'Field Notes' },
+  { href: '/en/contact', label: 'Contact' },
+];
+
+const links = isEN ? enLinks : ptLinks;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
+
+const isActive = (href: string) => {
+  if (href === '/en') return path === '/en';
+  if (href === '/') return path === '/';
+  return path === href || path.startsWith(`${href}/`);
+};
+
+const toggleMap: Record<string, string> = {
+  '/': '/en',
+  '/sobre': '/en/about',
+  '/projetos': '/en/projects',
+  '/fieldnotes': '/en/field-notes',
+  '/contato': '/en/contact',
+  '/en': '/',
+  '/en/about': '/sobre',
+  '/en/projects': '/projetos',
+  '/en/field-notes': '/fieldnotes',
+  '/en/contact': '/contato',
+};
+
+let toggleHref = toggleMap[path];
+if (!toggleHref) {
+  if (isEN) {
+    toggleHref = path.startsWith('/en/projects/') ? '/projetos'
+               : path.startsWith('/en/field-notes/') ? '/fieldnotes'
+               : '/';
+  } else {
+    toggleHref = path.startsWith('/projetos/') ? '/en/projects'
+               : path.startsWith('/fieldnotes/') ? '/en/field-notes'
+               : '/en';
+  }
+}
 ---
 
 <nav>
-  <a href="/" class="nav-logo">Adriane S<span>.</span> Bulhões</a>
+  <a href={isEN ? '/en' : '/'} class="nav-logo">Adriane Bulhões</a>
   <div class="nav-right">
     <ul class="nav-links">
       {links.map((l) => (
@@ -20,5 +61,27 @@ const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
         </li>
       ))}
     </ul>
+    <a href={toggleHref} class="lang-toggle" aria-label={isEN ? 'Mudar para português' : 'Switch to English'}>
+      {isEN ? 'PT' : 'EN'}
+    </a>
   </div>
 </nav>
+
+<style>
+  .lang-toggle {
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 0.28em 0.7em;
+    border: 1px solid rgba(200, 232, 240, 0.15);
+    border-radius: 2px;
+    transition: color 0.25s, border-color 0.25s;
+    margin-left: 1.2rem;
+  }
+  .lang-toggle:hover {
+    color: var(--glacier-pale);
+    border-color: rgba(200, 232, 240, 0.4);
+  }
+</style>

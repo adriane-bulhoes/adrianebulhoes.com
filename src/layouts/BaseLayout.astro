@@ -11,16 +11,18 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  lang?: string;
 }
 
 const {
   title,
-  description = 'Adriane Santana Bulhões — investigadora em Ciências da Terra. Ecologia costeira e sensoriamento remoto, do manguezal da Bahia às costas vulcânicas da Oceania.',
+  description = 'Adriane Bulhões — investigadora em Ciências da Terra. Geologia, oceano e detecção remota, das rochas da Bahia às costas vulcânicas da Oceania.',
+  lang = 'pt',
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="pt">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,7 +44,7 @@ const {
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang as 'pt' | 'en'} />
 
     <script>
       const obs = new IntersectionObserver(

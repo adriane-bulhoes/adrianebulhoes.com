@@ -1,9 +1,12 @@
 ---
-/** Site footer, shared across every page. */
+interface Props {
+  lang?: 'pt' | 'en';
+}
+const { lang = 'pt' } = Astro.props;
 ---
 
 <footer>
-  <p>Adriane Santana Bulhões · Salvador, Bahia · Waiheke, NZ</p>
-  <span class="footer-element">Terra, água, ciência.</span>
-  <p>Ecossistemas costeiros · Ciências da Terra</p>
+  <p>Adriane Bulhões · Salvador, Bahia · Waiheke, NZ</p>
+  <span class="footer-element">{lang === 'en' ? 'Earth, water, science.' : 'Terra, água, ciência.'}</span>
+  <p>{lang === 'en' ? 'Geology · Ocean · Earth Sciences' : 'Geologia · Oceano · Ciências da Terra'}</p>
 </footer>

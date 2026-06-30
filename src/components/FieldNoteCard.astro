@@ -1,17 +1,21 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
-import { monthYear } from '../lib/format-date';
+import { monthYear, monthYearEN } from '../lib/format-date';
 
 interface Props {
   note: CollectionEntry<'fieldnotes'>;
   featured?: boolean;
   index?: number;
+  lang?: 'pt' | 'en';
+  basePath?: string;
 }
-const { note, featured = false, index = 0 } = Astro.props;
+const { note, featured = false, index = 0, lang = 'pt', basePath = '/fieldnotes' } = Astro.props;
 const { title, date, location, tags, excerpt, cover } = note.data;
-const href = `/fieldnotes/${note.id}`;
+const href = `${basePath}/${note.id}`;
 const delay = index ? `transition-delay:${Math.min(index, 4) * 0.08}s` : undefined;
+const readLabel = lang === 'en' ? 'Read note' : 'Ler nota';
+const formattedDate = lang === 'en' ? monthYearEN(date) : monthYear(date);
 ---
 
 <article class:list={['note-card', 'reveal', { featured }]} style={delay}>
@@ -22,14 +26,14 @@ const delay = index ? `transition-delay:${Math.min(index, 4) * 0.08}s` : undefin
   )}
   <div class="note-body">
     <div class="note-meta">
-      <span class="note-date">{monthYear(date)}</span>
+      <span class="note-date">{formattedDate}</span>
       <span class="note-loc">{location}</span>
     </div>
     <h2 class="note-title"><a href={href}>{title}</a></h2>
     {excerpt && <p class="note-excerpt">{excerpt}</p>}
     <div class="note-footer">
       <div class="note-tags">{tags.map((t) => <span class="note-tag">{t}</span>)}</div>
-      <a href={href} class="note-read">Ler nota</a>
+      <a href={href} class="note-read">{readLabel}</a>
     </div>
   </div>
 </article>

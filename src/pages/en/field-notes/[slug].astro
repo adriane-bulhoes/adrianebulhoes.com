@@ -1,11 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { fullDate } from '../../lib/format-date';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { fullDateEN } from '../../../lib/format-date';
 
 export const getStaticPaths = (async () => {
-  const notes = await getCollection('fieldnotes', ({ data }) => data.lang !== 'en');
+  const notes = await getCollection('fieldnotes', ({ data }) => data.lang === 'en');
   return notes.map((note) => ({ params: { slug: note.id }, props: { note } }));
 }) satisfies GetStaticPaths;
 
@@ -14,11 +14,11 @@ const { Content } = await render(note);
 const { title, date, location, tags, excerpt } = note.data;
 ---
 
-<BaseLayout title={`${title} — Field Notes`} description={excerpt ?? title}>
+<BaseLayout title={`${title} — Field Notes`} lang="en" description={excerpt ?? title}>
   <article class="note-article">
-    <a href="/fieldnotes" class="back-link">Field Notes</a>
+    <a href="/en/field-notes" class="back-link">Field Notes</a>
     <div class="article-meta">
-      <span class="article-date">{fullDate(date)}</span>
+      <span class="article-date">{fullDateEN(date)}</span>
       <span class="article-loc">{location}</span>
     </div>
     <h1 class="article-title">{title}</h1>
@@ -29,7 +29,7 @@ const { title, date, location, tags, excerpt } = note.data;
       <Content />
     </div>
     <div class="article-footer">
-      <a href="/fieldnotes" class="clink">Todas as entradas</a>
+      <a href="/en/field-notes" class="clink">All entries</a>
     </div>
   </article>
 </BaseLayout>
@@ -69,18 +69,10 @@ const { title, date, location, tags, excerpt } = note.data;
   .article-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
   .article-tag { font-size: 0.52rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lava-glow); }
 
-  /* Rendered Markdown body */
-  .article-body :global(p) {
-    font-size: 1rem;
-    line-height: 1.95;
-    color: #6a9aaa;
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-  }
+  .article-body :global(p) { font-size: 1rem; line-height: 1.95; color: #6a9aaa; margin-bottom: 1.5rem; font-weight: 300; }
   .article-body :global(em) { font-family: var(--ff-serif); font-style: italic; color: var(--text-mid); font-size: 1.12rem; }
   .article-body :global(strong) { color: var(--glacier-pale); font-weight: 400; }
-  .article-body :global(h2),
-  .article-body :global(h3) { font-family: var(--ff-serif); font-weight: 400; color: var(--glacier-pale); margin: 2.5rem 0 1rem; line-height: 1.2; }
+  .article-body :global(h2), .article-body :global(h3) { font-family: var(--ff-serif); font-weight: 400; color: var(--glacier-pale); margin: 2.5rem 0 1rem; line-height: 1.2; }
   .article-body :global(h2) { font-size: 1.7rem; }
   .article-body :global(h3) { font-size: 1.3rem; }
   .article-body :global(a) { color: var(--glacier-mid); text-underline-offset: 3px; }
@@ -95,8 +87,7 @@ const { title, date, location, tags, excerpt } = note.data;
     margin: 2.5rem 0;
   }
   .article-body :global(img) { width: 100%; height: auto; border-radius: 3px; margin: 2rem 0; }
-  .article-body :global(ul),
-  .article-body :global(ol) { color: #6a9aaa; line-height: 1.9; margin: 0 0 1.5rem 1.2rem; font-weight: 300; }
+  .article-body :global(ul), .article-body :global(ol) { color: #6a9aaa; line-height: 1.9; margin: 0 0 1.5rem 1.2rem; font-weight: 300; }
 
   .article-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(200, 232, 240, 0.08); }
 </style>

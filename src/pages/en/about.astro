@@ -1,39 +1,39 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import StratumDivider from '../components/StratumDivider.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StratumDivider from '../../components/StratumDivider.astro';
 
 const skills = [
-  { icon: '🛰', name: 'Detecção Remota', desc: 'Análise de imagens de satélite para mapeamento e monitorização de ecossistemas costeiros ao longo do tempo.', chips: ['Google Earth Engine', 'Sentinel-2', 'Landsat', 'NDVI'], delay: 0 },
-  { icon: '🐍', name: 'Programação científica', desc: 'Python como ferramenta de análise de dados ambientais, visualização e automação de processos científicos.', chips: ['Python', 'Dados geoespaciais', 'Visualização'], delay: 0.1 },
-  { icon: '🌿', name: 'Ciência de campo', desc: 'Observação e registo de biodiversidade costeira. Identificação de espécies, monitorização intertidal e ciência comunitária.', chips: ['iNaturalist', 'Ecologia costeira', 'Manguezal'], delay: 0.2 },
-  { icon: '🌍', name: 'Línguas', desc: 'Comunicação científica em três idiomas, essencial para colaborações internacionais e divulgação.', chips: ['Português', 'English', 'Español'], delay: 0.05 },
-  { icon: '👥', name: 'Liderança técnica', desc: '6 anos de gestão de equipas em contexto técnico. Tradução entre linguagens científicas e humanas.', chips: ['Gestão de equipas', 'Comunicação'], delay: 0.15 },
-  { icon: '💻', name: 'Desenvolvimento web', desc: 'Pós-graduação Full Stack. Competência técnica aplicada à divulgação e visualização científica.', chips: ['HTML · CSS · JS', 'Full Stack'], delay: 0.25 },
+  { icon: '🛰', name: 'Remote Sensing', desc: 'Analysis of satellite imagery for mapping and monitoring coastal ecosystems over time.', chips: ['Google Earth Engine', 'Sentinel-2', 'Landsat', 'NDVI'], delay: 0 },
+  { icon: '🐍', name: 'Scientific programming', desc: 'Python as a tool for environmental data analysis, visualisation and automation of scientific processes.', chips: ['Python', 'Geospatial data', 'Visualisation'], delay: 0.1 },
+  { icon: '🌿', name: 'Field science', desc: 'Observation and recording of coastal biodiversity. Species identification, intertidal monitoring and citizen science.', chips: ['iNaturalist', 'Coastal ecology', 'Mangrove'], delay: 0.2 },
+  { icon: '🌍', name: 'Languages', desc: 'Scientific communication in three languages, essential for international collaboration and outreach.', chips: ['Portuguese', 'English', 'Spanish'], delay: 0.05 },
+  { icon: '👥', name: 'Technical leadership', desc: '6 years managing teams in a technical context. Translation between scientific and human languages.', chips: ['Team management', 'Communication'], delay: 0.15 },
+  { icon: '💻', name: 'Web development', desc: 'Postgraduate Full Stack qualification. Technical skill applied to scientific outreach and visualisation.', chips: ['HTML · CSS · JS', 'Full Stack'], delay: 0.25 },
 ];
 
 const timeline = [
-  { year: 'Salvador, BA', title: 'Ilha de Bom Jesus dos Passos', desc: 'Cresceu numa família de marisqueiros e pescadores. O oceano e a geologia costeira como primeiros laboratórios.', delay: 0 },
-  { year: 'Chapada Diamantina', title: 'O tempo geológico visível', desc: 'Antes da universidade, o planalto de quartzito e as cavernas confirmaram o que já sabia: queria trabalhar com geologia e ambiente.', delay: 0.08 },
-  { year: 'UFBA', title: 'Licenciatura em Ciências e Tecnologia', desc: 'Disciplinas em Ecologia, Climatologia, Oceanografia, Ciências da Terra e Geologia. Base científica multidisciplinar que une ambiente, dados e sistemas complexos.', delay: 0.16 },
-  { year: 'UNOPAR', title: 'Pós-graduação em Desenvolvimento Web Full Stack', desc: 'Formação técnica em desenvolvimento de software. Competência que a ciência ambiental moderna cada vez mais precisa: dados, visualização, automação.', delay: 0.24 },
-  { year: '6 anos', title: 'Liderança de equipas em ambiente técnico', desc: 'Gestão de operações e equipas. Tradução entre linguagens técnicas e humanas, competência rara e valiosa na ciência.', delay: 0.32 },
-  { year: 'Em curso, 2025/2026', title: 'Candidatura a mestrado', desc: 'Geologia, ciências da Terra e ambiente. Objectivo de seguir para doutoramento em sistemas costeiros e detecção remota.', delay: 0.40 },
+  { year: 'Salvador, BA', title: 'Island of Bom Jesus dos Passos', desc: 'Grew up in a family of shellfish gatherers and fishers. The ocean and coastal geology as first laboratories.', delay: 0 },
+  { year: 'Chapada Diamantina', title: 'Geological time made visible', desc: 'Before university, the quartzite plateau and the caves confirmed what she already knew: she wanted to work with geology and the environment.', delay: 0.08 },
+  { year: 'UFBA', title: 'Degree in Science and Technology', desc: 'Courses in Ecology, Climatology, Oceanography, Earth Sciences and Geology. A multidisciplinary scientific foundation linking environment, data and complex systems.', delay: 0.16 },
+  { year: 'UNOPAR', title: 'Postgraduate in Full Stack Web Development', desc: 'Technical training in software development. A skill that environmental science increasingly needs: data, visualisation, automation.', delay: 0.24 },
+  { year: '6 years', title: 'Leading teams in a technical environment', desc: 'Operations and team management. Translation between technical and human languages, a rare and valuable skill in science.', delay: 0.32 },
+  { year: 'In progress, 2025/2026', title: "Master's application", desc: 'Geology, Earth sciences and environment. Aiming for a doctorate in coastal systems and remote sensing.', delay: 0.40 },
 ];
 ---
 
-<BaseLayout title="Sobre — Adriane Bulhões" description="Investigadora em Ciências da Terra. Geologia, oceano e detecção remota, entre a Bahia, a Irlanda e a Nova Zelândia.">
+<BaseLayout title="About — Adriane Bulhões" lang="en" description="Earth sciences researcher. Geology, ocean and remote sensing, between Bahia, Ireland and New Zealand.">
   <!-- HERO -->
   <section class="sobre-hero">
     <div class="glow" style="width:600px;height:600px;background:rgba(74,154,176,.1);top:-150px;right:-200px;animation-delay:-6s;"></div>
     <div class="glow" style="width:350px;height:350px;background:rgba(192,90,32,.06);bottom:0;left:10%;animation-delay:-13s;"></div>
-    <div class="page-hero-eyebrow">Sobre mim</div>
+    <div class="page-hero-eyebrow">About</div>
     <h1 class="page-hero-title">Adriane<br />Bulhões</h1>
-    <p class="page-hero-sub">Investigadora em Ciências da Terra. Bahia, Irlanda, Nova Zelândia.</p>
+    <p class="page-hero-sub">Earth Sciences Researcher. Bahia, Ireland, New Zealand.</p>
   </section>
 
   <StratumDivider fill="#111618" />
 
-  <!-- INTRO + FOTO -->
+  <!-- INTRO + PHOTO -->
   <section class="sobre-intro">
     <div class="sobre-intro-grid">
       <div class="photo-col reveal">
@@ -53,37 +53,27 @@ const timeline = [
                 <polygon points="0,-45 20,-12 14,32 -14,32 -20,-12" fill="none" stroke="#89c4d4" stroke-width=".8" />
                 <polygon points="0,-28 12,-6 8,20 -8,20 -12,-6" fill="none" stroke="#89c4d4" stroke-width=".5" opacity=".5" />
               </g>
-              <g fill="none" stroke="#1e2e2e" stroke-width=".5">
-                <line x1="22" y1="100" x2="32" y2="100" />
-                <line x1="22" y1="165" x2="32" y2="165" />
-                <line x1="22" y1="240" x2="32" y2="240" />
-                <line x1="22" y1="330" x2="32" y2="330" />
-              </g>
-              <text x="36" y="104" fill="#2a5a6a" font-family="DM Mono,monospace" font-size="7" opacity=".6">0m</text>
-              <text x="36" y="169" fill="#2a5a6a" font-family="DM Mono,monospace" font-size="7" opacity=".5">−65m</text>
-              <text x="36" y="244" fill="#2a5a6a" font-family="DM Mono,monospace" font-size="7" opacity=".4">−140m</text>
-              <text x="36" y="334" fill="#2a5a6a" font-family="DM Mono,monospace" font-size="7" opacity=".3">−230m</text>
             </svg>
           </div>
         </div>
-        <p class="photo-caption">Foto na natureza, em breve</p>
+        <p class="photo-caption">Photo in the field, coming soon</p>
         <div class="location-trail">
-          <div class="loc-item"><div class="loc-dot"></div><span>Salvador, Bahia · origem</span></div>
-          <div class="loc-item"><div class="loc-dot"></div><span>Ilha de Bom Jesus dos Passos</span></div>
-          <div class="loc-item"><div class="loc-dot"></div><span>Irlanda · segundo olhar</span></div>
-          <div class="loc-item now"><div class="loc-dot"></div><span>Waiheke Island, NZ · agora</span></div>
+          <div class="loc-item"><div class="loc-dot"></div><span>Salvador, Bahia · origin</span></div>
+          <div class="loc-item"><div class="loc-dot"></div><span>Island of Bom Jesus dos Passos</span></div>
+          <div class="loc-item"><div class="loc-dot"></div><span>Ireland · second look</span></div>
+          <div class="loc-item now"><div class="loc-dot"></div><span>Waiheke Island, NZ · now</span></div>
         </div>
       </div>
 
       <div class="reveal" style="transition-delay:.12s">
-        <h2 class="sobre-title">Cresci entre<br />raízes e <em>maré</em>.</h2>
+        <h2 class="sobre-title">I grew up between<br />roots and <em>tide</em>.</h2>
         <div class="sobre-text">
-          <p>Desde criança gostei de geologia. Os vulcões, as rochas, a ideia de que aquilo que pisamos tem camadas e idade. Cresci em Salvador e passava as férias na Ilha de Bom Jesus dos Passos, onde a minha família é de marisqueiros e pescadores. Foi ali que ganhei o amor pelo oceano, que nunca mais me deixou.</p>
-          <p>O interesse pela geologia veio por conta própria, cedo. Ia aos museus de história natural ver as rochas expostas, e ainda hoje, quando chego a um país novo, procuro logo a sua geologia e os seus museus. Gostava de estar perto daquilo, mesmo sem saber ainda o que fazer com esse interesse.</p>
-          <p>Foi na Chapada Diamantina, antes da universidade, que percebi que queria trabalhar com isto. O planalto de quartzito, as cavernas, o tempo geológico visível na rocha. Saí de lá com a questão já decidida.</p>
-          <p>Na universidade o interesse ganhou método. Tenho formação em <strong>Ciências e Tecnologia pela UFBA</strong>, com disciplinas em Ecologia, Oceanografia, Ciências da Terra e Geologia. Lembro de passar nos corredores e parar diante das amostras de rocha expostas, com a mesma curiosidade que tinha nos museus em criança. Tenho também pós-graduação em <strong>Desenvolvimento Web Full Stack</strong>, que uso para trabalhar com dados, visualização e automação.</p>
-          <p>Depois da universidade vivi na Irlanda, e agora em Waiheke Island, na Nova Zelândia, onde a geologia vulcânica costeira me dá uma nova forma de ver as mesmas perguntas. Três países, três relações diferentes entre uma comunidade e o seu ambiente. Isso mudou bastante a forma como penso a ciência.</p>
-          <p>O oceano e a rocha foram as paixões da minha infância, e continuam a ser o centro do que estudo.</p>
+          <p>I have liked geology since childhood. Volcanoes, rocks, the idea that what we walk on has layers and age. I grew up in Salvador and spent my holidays on the Island of Bom Jesus dos Passos, where my family are shellfish gatherers and fishers. That is where I gained my love for the ocean, which has never left me.</p>
+          <p>The interest in geology came on its own, early. I used to go to natural history museums to see the rocks on display, and still today, when I arrive in a new country, I look straight away for its geology and its museums. I liked being close to it all, even without yet knowing what to do with that interest.</p>
+          <p>It was at Chapada Diamantina, before university, that I understood I wanted to work with this. The quartzite plateau, the caves, geological time visible in the rock. I left with the question already decided.</p>
+          <p>At university the interest gained method. I have a degree in <strong>Science and Technology from UFBA</strong>, with courses in Ecology, Oceanography, Earth Sciences and Geology. I remember walking through the corridors and stopping in front of the exposed rock samples, with the same curiosity I had had in museums as a child. I also have a postgraduate qualification in <strong>Full Stack Web Development</strong>, which I use to work with data, visualisation and automation.</p>
+          <p>After university I lived in Ireland, and now on Waiheke Island, in New Zealand, where the coastal volcanic geology gives me a new way of looking at the same questions. Three countries, three different relationships between a community and its environment. That changed considerably the way I think about science.</p>
+          <p>The ocean and the rock were the passions of my childhood, and they remain the centre of what I study.</p>
         </div>
       </div>
     </div>
@@ -93,7 +83,7 @@ const timeline = [
 
   <!-- SKILLS -->
   <section class="skills-section">
-    <div class="section-label">Ferramentas &amp; competências <span>ciência</span></div>
+    <div class="section-label">Tools &amp; skills <span>science</span></div>
     <div class="skills-grid">
       {skills.map((s) => (
         <div class="skill-block reveal" style={s.delay ? `transition-delay:${s.delay}s` : undefined}>
@@ -108,9 +98,9 @@ const timeline = [
 
   <StratumDivider fill="#111618" bg="#162020" />
 
-  <!-- GALERIA -->
+  <!-- GALLERY -->
   <section class="gallery-section">
-    <div class="section-label">Na natureza <span>lugares que me formaram</span></div>
+    <div class="section-label">In nature <span>places that shaped me</span></div>
     <div class="gallery-grid">
       <div class="gallery-item reveal">
         <div class="gallery-placeholder">
@@ -120,15 +110,10 @@ const timeline = [
             <path d="M0,220 Q80,200 200,218 Q320,235 400,210 L400,300 L0,300 Z" fill="#1a3828" opacity=".8" />
             <ellipse cx="140" cy="215" rx="35" ry="18" fill="#0d3a22" opacity=".9" />
             <ellipse cx="220" cy="208" rx="28" ry="14" fill="#0d3a22" opacity=".85" />
-            <g opacity=".15" stroke="#4a9ab0" stroke-width=".6" fill="none">
-              <path d="M0,80 Q100,65 200,82 Q300,98 400,74" />
-              <path d="M0,130 Q120,112 200,132 Q280,150 400,122" />
-            </g>
-            <path d="M170,300 L185,200 L200,140 L215,200 L230,300 Z" fill="#1a4535" opacity=".5" />
           </svg>
         </div>
-        <div class="gallery-label">Ilha de Bom Jesus dos Passos</div>
-        <div class="gallery-soon">foto em breve</div>
+        <div class="gallery-label">Island of Bom Jesus dos Passos</div>
+        <div class="gallery-soon">photo coming soon</div>
       </div>
       <div class="gallery-item reveal" style="transition-delay:.1s">
         <div class="gallery-placeholder">
@@ -136,15 +121,10 @@ const timeline = [
             <rect width="200" height="260" fill="#0c1520" />
             <path d="M0,160 L100,60 L200,160 L200,260 L0,260 Z" fill="#1a2030" opacity=".8" />
             <path d="M60,160 L100,80 L140,160 Z" fill="#243040" opacity=".7" />
-            <g fill="none" stroke="#89c4d4" stroke-width=".5" opacity=".2">
-              <path d="M0,50 Q50,38 100,52 Q150,65 200,44" />
-              <path d="M0,100 Q50,85 100,102 Q150,118 200,92" />
-            </g>
-            <path d="M20,30 L35,55 L20,80 M35,55 L60,55" fill="none" stroke="#c8e8f0" stroke-width=".6" opacity=".15" />
           </svg>
         </div>
-        <div class="gallery-label">Islândia, Mýrdalsjökull</div>
-        <div class="gallery-soon">foto em breve</div>
+        <div class="gallery-label">Iceland, Mýrdalsjökull</div>
+        <div class="gallery-soon">photo coming soon</div>
       </div>
       <div class="gallery-item reveal" style="transition-delay:.2s">
         <div class="gallery-placeholder">
@@ -154,11 +134,10 @@ const timeline = [
             <circle cx="100" cy="120" r="38" fill="#112a14" opacity=".7" />
             <circle cx="100" cy="120" r="22" fill="#1a3a1a" opacity=".6" />
             <ellipse cx="100" cy="125" rx="16" ry="10" fill="#0d2535" opacity=".9" />
-            <path d="M0,200 Q100,185 200,198 L200,260 L0,260 Z" fill="#0a1f10" opacity=".8" />
           </svg>
         </div>
         <div class="gallery-label">Mount Eden, Auckland</div>
-        <div class="gallery-soon">foto em breve</div>
+        <div class="gallery-soon">photo coming soon</div>
       </div>
       <div class="gallery-item reveal" style="transition-delay:.3s">
         <div class="gallery-placeholder">
@@ -168,25 +147,20 @@ const timeline = [
             <circle cx="100" cy="130" r="50" fill="#c05a20" opacity=".15" />
             <circle cx="100" cy="130" r="35" fill="#e07030" opacity=".1" />
             <circle cx="100" cy="130" r="20" fill="#b8922a" opacity=".2" />
-            <path d="M0,200 Q50,188 100,202 Q150,215 200,195 L200,260 L0,260 Z" fill="#1a1008" opacity=".9" />
-            <g fill="none" stroke="#c05a20" stroke-width=".5" opacity=".2">
-              <circle cx="100" cy="130" r="58" />
-              <circle cx="100" cy="130" r="65" />
-            </g>
           </svg>
         </div>
         <div class="gallery-label">Wai-O-Tapu, Rotorua</div>
-        <div class="gallery-soon">foto em breve</div>
+        <div class="gallery-soon">photo coming soon</div>
       </div>
     </div>
   </section>
 
   <StratumDivider fill="#162020" bg="#111618" />
 
-  <!-- PERCURSO -->
+  <!-- TIMELINE -->
   <section class="timeline-section">
     <div class="glow" style="width:500px;height:500px;background:rgba(74,154,176,.07);top:20%;right:-200px;animation-delay:-9s;"></div>
-    <div class="section-label">Percurso <span>formação</span></div>
+    <div class="section-label">Background <span>education</span></div>
     <div class="timeline">
       {timeline.map((t) => (
         <div class="t-item reveal" style={t.delay ? `transition-delay:${t.delay}s` : undefined}>
@@ -203,10 +177,10 @@ const timeline = [
   <!-- CTA -->
   <section class="sobre-cta">
     <div class="reveal sobre-cta-row">
-      <h2>Ver a investigação <em>em curso</em>.</h2>
+      <h2>See the research <em>in progress</em>.</h2>
       <div class="sobre-cta-actions">
-        <a href="/projetos" class="clink clink-primary">Projetos</a>
-        <a href="/contato" class="clink">Contacto</a>
+        <a href="/en/projects" class="clink clink-primary">Projects</a>
+        <a href="/en/contact" class="clink">Contact</a>
       </div>
     </div>
   </section>
@@ -227,56 +201,21 @@ const timeline = [
   .sobre-intro-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: start; }
   .photo-col { position: sticky; top: 8rem; }
   .photo-frame { width: 100%; max-width: 340px; aspect-ratio: 3 / 4; position: relative; margin-bottom: 2rem; }
-  .photo-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--deep-rock);
-    border: 1px solid rgba(200, 232, 240, 0.07);
-    overflow: hidden;
-    position: relative;
-  }
+  .photo-placeholder { width: 100%; height: 100%; background: var(--deep-rock); border: 1px solid rgba(200, 232, 240, 0.07); overflow: hidden; position: relative; }
   .photo-placeholder svg { width: 100%; height: 100%; position: absolute; inset: 0; }
   .photo-caption { font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); }
-
   .location-trail { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1.5rem; }
   .loc-item { display: flex; align-items: center; gap: 0.9rem; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--text-dim); }
   .loc-item.now { color: var(--glacier-mid); }
   .loc-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--text-ghost); flex-shrink: 0; }
   .loc-item.now .loc-dot { background: var(--glacier-mid); box-shadow: 0 0 10px rgba(138, 196, 212, 0.5); }
-
-  .sobre-title {
-    font-family: var(--ff-serif);
-    font-size: clamp(2.5rem, 4.5vw, 4rem);
-    font-weight: 300;
-    line-height: 1.05;
-    margin-bottom: 2.5rem;
-  }
+  .sobre-title { font-family: var(--ff-serif); font-size: clamp(2.5rem, 4.5vw, 4rem); font-weight: 300; line-height: 1.05; margin-bottom: 2.5rem; }
   .sobre-title em { font-style: italic; color: var(--glacier-mid); }
   .sobre-text p { font-size: 0.9rem; line-height: 2; color: #6a9aaa; margin-bottom: 1.6rem; font-weight: 300; }
   .sobre-text p strong { color: var(--glacier-pale); font-weight: 400; }
-  .sobre-text .pull {
-    font-family: var(--ff-serif);
-    font-style: italic;
-    font-size: 1.4rem;
-    color: var(--text-mid);
-    line-height: 1.4;
-    border-left: 1px solid var(--glacier-deep);
-    padding-left: 1.5rem;
-    margin: 2.5rem 0;
-  }
 
-  /* SKILLS */
   .skills-section { background: var(--deep-rock); padding: 7rem 3rem; position: relative; z-index: 10; }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: rgba(200, 232, 240, 0.06);
-    border: 1px solid rgba(200, 232, 240, 0.06);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 3rem;
-  }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(200, 232, 240, 0.06); border: 1px solid rgba(200, 232, 240, 0.06); border-radius: 3px; overflow: hidden; margin-top: 3rem; }
   .skill-block { background: var(--obsidian); padding: 2rem; transition: background 0.3s; }
   .skill-block:hover { background: var(--rock-mid); }
   .skill-icon { font-size: 1.4rem; margin-bottom: 0.8rem; }
@@ -285,71 +224,23 @@ const timeline = [
   .skill-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1rem; }
   .chip { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.28em 0.7em; border: 1px solid rgba(74, 154, 176, 0.25); color: var(--glacier-deep); }
 
-  /* GALLERY */
   .gallery-section { background: var(--obsidian); padding: 7rem 3rem; position: relative; z-index: 10; }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(200, 232, 240, 0.05);
-    border: 1px solid rgba(200, 232, 240, 0.05);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 3rem;
-  }
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(200, 232, 240, 0.05); border: 1px solid rgba(200, 232, 240, 0.05); border-radius: 3px; overflow: hidden; margin-top: 3rem; }
   .gallery-item { aspect-ratio: 3 / 4; background: var(--deep-rock); position: relative; overflow: hidden; }
   .gallery-item:first-child { grid-column: span 2; aspect-ratio: auto; }
   .gallery-placeholder { width: 100%; height: 100%; position: relative; }
-  .gallery-label {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    font-size: 0.55rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(200, 232, 240, 0.4);
-    z-index: 2;
-  }
-  .gallery-soon {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 0.5rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(200, 232, 240, 0.25);
-  }
+  .gallery-label { position: absolute; bottom: 1rem; left: 1rem; font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(200, 232, 240, 0.4); z-index: 2; }
+  .gallery-soon { position: absolute; top: 1rem; right: 1rem; font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(200, 232, 240, 0.25); }
 
-  /* TIMELINE */
   .timeline-section { background: var(--deep-rock); padding: 7rem 3rem; position: relative; z-index: 10; overflow: hidden; }
   .timeline { position: relative; max-width: 700px; margin-top: 1rem; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--glacier-deep), transparent);
-  }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--glacier-deep), transparent); }
   .t-item { padding-left: 2.8rem; padding-bottom: 3.8rem; position: relative; }
-  .t-item::before {
-    content: '';
-    position: absolute;
-    left: -4px;
-    top: 5px;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--deep-rock);
-    border: 1px solid var(--glacier-deep);
-    box-shadow: 0 0 12px rgba(74, 154, 176, 0.35);
-  }
+  .t-item::before { content: ''; position: absolute; left: -4px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: var(--deep-rock); border: 1px solid var(--glacier-deep); box-shadow: 0 0 12px rgba(74, 154, 176, 0.35); }
   .t-year { font-size: 0.58rem; letter-spacing: 0.2em; color: var(--glacier-deep); margin-bottom: 0.45rem; text-transform: uppercase; }
   .t-title { font-family: var(--ff-serif); font-size: 1.15rem; font-weight: 400; color: var(--glacier-pale); margin-bottom: 0.45rem; line-height: 1.2; }
   .t-desc { font-size: 0.78rem; line-height: 1.75; color: var(--text-dim); font-weight: 300; }
 
-  /* CTA */
   .sobre-cta { background: var(--basalt); padding: 5rem 3rem; position: relative; z-index: 10; }
   .sobre-cta-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
   .sobre-cta-row h2 { font-family: var(--ff-serif); font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; }

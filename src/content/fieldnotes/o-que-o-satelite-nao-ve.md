@@ -1,15 +1,13 @@
 ---
 title: "O que o satélite não consegue ver"
 date: 2025-01-15
-location: "Ilha de Bom Jesus dos Passos — BR"
+location: "Ilha de Bom Jesus dos Passos, BR"
 tags: ["manguezal", "memória", "GEE"]
-excerpt: "O Google Earth Engine mostra ~40% menos cobertura de manguezal desde 1985. Mas o que o satélite não vê é o silêncio que ficou."
+excerpt: "Entre 1990 e 2023, a ilha perdeu cerca de 6 hectares de vegetação densa, quase um quinto do que existia. O número vem do Google Earth Engine. Mas há uma camada da perda que nenhuma imagem de satélite regista."
 ---
 
-O Google Earth Engine mostra uma perda de ~40% de cobertura de manguezal na ilha desde 1985. O número é rigoroso — validado por NDVI, confirmado por análise temporal de múltiplas imagens.
+Entre 1990 e 2023, a ilha perdeu cerca de 6 hectares de vegetação densa, uma perda líquida de quase um quinto do que existia. O número vem do Google Earth Engine, validado por NDVI e por uma classificação supervisionada que isolou o mangue do resto. Mas o dado mais revelador não é o total. É onde a perda aconteceu: nas bordas costeiras, enquanto o interior ganhava vegetação. Mangue nativo a recuar de um lado, verde urbano a avançar do outro. O ecossistema não desapareceu apenas, foi substituído.
 
-*Mas o que o satélite não consegue ver é o silêncio que ficou.*
+E ainda assim há uma camada inteira da perda que o satélite não alcança. Onde havia mangue havia também o barulho das marisqueiras, as conversas ao amanhecer, o cheiro a marisco, o som das raízes a mover a lama na maré. A degradação de um ecossistema nunca é só ecológica. É também sonora, social, feita das vidas que dependiam daquele verde agora ausente do mapa.
 
-Onde havia manguezal havia também o barulho das marisqueiras. Havia conversas ao amanhecer, cheiro de marisco, o som das raízes na lama. A degradação do ecossistema não é só ecológica — é também sonora, social, cultural.
-
-A ciência que quero fazer precisa de medir as duas coisas.
+Penso nisso quando olho para os índices de vegetação no ecrã. O NDVI mede o que reflecte a luz, e fá-lo muito bem. O que ficou em silêncio depois de o mangue recuar é exactamente aquilo que a ciência que quero fazer ainda precisa de aprender a medir.

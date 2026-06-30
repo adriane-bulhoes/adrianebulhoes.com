@@ -5,12 +5,15 @@ import ProjetoVisual from './ProjetoVisual.astro';
 interface Props {
   projeto: CollectionEntry<'projetos'>;
   index?: number;
+  lang?: 'pt' | 'en';
+  basePath?: string;
 }
-const { projeto, index = 0 } = Astro.props;
+const { projeto, index = 0, lang = 'pt', basePath = '/projetos' } = Astro.props;
 const { title, subtitle, eyebrow, coords, summary, status, visual, cover } = projeto.data;
-const href = `/projetos/${projeto.id}`;
+const href = `${basePath}/${projeto.id}`;
 const statusClass = status.replace(/\s+/g, '-');
 const delay = index ? `transition-delay:${Math.min(index, 4) * 0.1}s` : undefined;
+const linkLabel = lang === 'en' ? 'View project' : 'Ver projecto';
 ---
 
 <a class="pteaser reveal" href={href} style={delay}>
@@ -23,7 +26,7 @@ const delay = index ? `transition-delay:${Math.min(index, 4) * 0.1}s` : undefine
     <h2 class="pteaser-title">{title}{subtitle && <em> {subtitle}</em>}</h2>
     {coords && <p class="pteaser-coords">{coords}</p>}
     {summary && <p class="pteaser-summary">{summary}</p>}
-    <span class="pteaser-link">Ver projeto</span>
+    <span class="pteaser-link">{linkLabel}</span>
   </div>
 </a>
 
@@ -59,6 +62,9 @@ const delay = index ? `transition-delay:${Math.min(index, 4) * 0.1}s` : undefine
   .status-badge.em-desenvolvimento { color: var(--lava-bright); border: 1px solid rgba(224, 112, 48, 0.3); }
   .status-badge.concluído { color: var(--glacier-mid); border: 1px solid rgba(138, 196, 212, 0.3); }
   .status-badge.planeado { color: var(--text-dim); border: 1px solid rgba(143, 176, 189, 0.25); }
+  .status-badge.in-development { color: var(--lava-bright); border: 1px solid rgba(224, 112, 48, 0.3); }
+  .status-badge.completed { color: var(--glacier-mid); border: 1px solid rgba(138, 196, 212, 0.3); }
+  .status-badge.planned { color: var(--text-dim); border: 1px solid rgba(143, 176, 189, 0.25); }
 
   .pteaser-eyebrow { font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--lava-glow); }
   .pteaser-title { font-family: var(--ff-serif); font-size: 1.9rem; font-weight: 300; line-height: 1; color: var(--glacier-pale); }

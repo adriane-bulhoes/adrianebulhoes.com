@@ -1,0 +1,117 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import StratumDivider from '../../../components/StratumDivider.astro';
+import FieldNoteCard from '../../../components/FieldNoteCard.astro';
+
+const notes = (
+  await getCollection('fieldnotes', ({ data }) => data.lang === 'en' && (import.meta.env.PROD ? !data.draft : true))
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const filters = ['All', 'Geology', 'Volcanism', 'Coastal', 'Mangrove', 'Iceland', 'New Zealand', 'Brazil'];
+---
+
+<BaseLayout title="Field Notes — Adriane Bulhões" lang="en" description="Observations, questions and fragments from the field, between the low tide and the satellite.">
+  <!-- HERO -->
+  <section class="fn-hero">
+    <div class="glow" style="width:600px;height:600px;background:rgba(184,146,42,.06);top:-200px;right:-150px;animation-delay:-4s;"></div>
+    <div class="page-hero-eyebrow">Field Notes</div>
+    <h1 class="page-hero-title">Field<br /><em>Notes</em></h1>
+    <p class="page-hero-sub">Observations, questions and fragments from the field, between the low tide and the satellite.</p>
+  </section>
+
+  <StratumDivider fill="#111618" />
+
+  <!-- INTRO -->
+  <div class="fn-intro reveal">
+    <p>It is a field diary, short entries written close to the moment, between the observation and the analysis. Bioluminescence at Palm Beach. The chemistry of Champagne Pool. The mangrove that is no longer there and what the satellite cannot record. Science and attention, in the places where the two have not yet fully separated.</p>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="fn-filters">
+    {filters.map((f) => (
+      <button class:list={['filter-chip', { active: f === 'All' }]}>{f}</button>
+    ))}
+  </div>
+
+  <!-- NOTES GRID -->
+  <section class="fn-list">
+    {notes.length === 0 ? (
+      <p class="fn-empty">No entries published yet.</p>
+    ) : (
+      <div class="fn-grid">
+        {notes.map((note, i) => (
+          <FieldNoteCard note={note} index={i} lang="en" basePath="/en/field-notes" />
+        ))}
+      </div>
+    )}
+  </section>
+
+  <StratumDivider fill="#0a0e0f" bg="#111618" />
+
+  <!-- CTA -->
+  <section class="fn-cta">
+    <div class="reveal fn-cta-row">
+      <h2>See the <em>research</em>.</h2>
+      <div class="fn-cta-actions">
+        <a href="/en/projects" class="clink clink-primary">Projects</a>
+        <a href="/en/contact" class="clink">Contact</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .fn-hero {
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+  }
+  .fn-intro {
+    background: var(--obsidian);
+    padding: 4rem 3rem 2rem;
+    position: relative;
+    z-index: 10;
+  }
+  .fn-intro p { font-size: 0.9rem; line-height: 1.95; color: #6a9aaa; max-width: 680px; font-weight: 300; font-style: italic; font-family: var(--ff-serif); }
+  .fn-filters {
+    background: var(--obsidian);
+    padding: 1.5rem 3rem 3rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+  }
+  .filter-chip {
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.35em 0.9em;
+    border: 1px solid rgba(200, 232, 240, 0.12);
+    background: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .filter-chip:hover, .filter-chip.active { border-color: var(--glacier-deep); color: var(--glacier-pale); }
+  .fn-list { background: var(--obsidian); padding: 0 3rem 7rem; position: relative; z-index: 10; }
+  .fn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(200, 232, 240, 0.05); border: 1px solid rgba(200, 232, 240, 0.05); border-radius: 3px; overflow: hidden; }
+  .fn-empty { font-size: 0.85rem; color: var(--text-dim); }
+  .fn-cta { background: var(--basalt); padding: 5rem 3rem; position: relative; z-index: 10; }
+  .fn-cta-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+  .fn-cta-row h2 { font-family: var(--ff-serif); font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; }
+  .fn-cta-row h2 em { font-style: italic; color: var(--mineral-pale); }
+  .fn-cta-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  @media (max-width: 900px) {
+    .fn-grid { grid-template-columns: 1fr; }
+    .fn-hero { padding: 0 1.5rem 4rem; }
+    .fn-intro, .fn-filters, .fn-list { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+</style>

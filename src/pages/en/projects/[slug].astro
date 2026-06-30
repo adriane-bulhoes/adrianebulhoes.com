@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import StratumDivider from '../../../components/StratumDivider.astro';
+import ProjetoCard from '../../../components/ProjetoCard.astro';
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection('projetos', ({ data }) => data.lang === 'en');
+  return projects.map((projeto) => ({ params: { slug: projeto.id }, props: { projeto } }));
+}) satisfies GetStaticPaths;
+
+const { projeto } = Astro.props;
+const { title, subtitle, summary } = projeto.data;
+const heading = subtitle ? `${title} ${subtitle}` : title;
+---
+
+<BaseLayout title={`${heading} — Projects`} lang="en" description={summary ?? heading}>
+  <div class="proj-detail-top">
+    <a href="/en/projects" class="back-link">Projects</a>
+  </div>
+  <ProjetoCard projeto={projeto} compact />
+  <StratumDivider fill="#0a0e0f" bg="#111618" />
+</BaseLayout>
+
+<style>
+  .proj-detail-top {
+    position: relative;
+    z-index: 10;
+    padding: 7rem 3rem 0;
+    background: var(--obsidian);
+  }
+  .back-link {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--glacier-deep);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .back-link::before { content: '← '; }
+  .back-link:hover { color: var(--glacier-pale); }
+</style>
