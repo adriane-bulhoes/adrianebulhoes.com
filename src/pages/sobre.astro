@@ -11,7 +11,31 @@ const skills = [
   { icon: '💻', name: 'Desenvolvimento web', desc: 'Pós-graduação Full Stack. Competência técnica aplicada à divulgação e visualização científica.', chips: ['HTML · CSS · JS', 'Full Stack'], delay: 0.25 },
 ];
 
-const lugares = Array.from({ length: 19 }, (_, i) => `/lugares/lugares-${String(i + 1).padStart(2, '0')}.jpeg`);
+const lugaresCaptions = [
+  'Reynisfjara, Islândia',
+  'Terras Altas da Islândia',
+  'Cliffs of Moher, Irlanda',
+  'Sólheimajökull, Islândia',
+  'Mýrdalsjökull, Islândia',
+  'Gruta de gelo, Mýrdalsjökull',
+  'Mýrdalsjökull, Islândia',
+  'Mýrdalssandur, Islândia',
+  'Reykjavik, Islândia',
+  'Reynisfjara, Islândia',
+  'Reynisfjara, Islândia',
+  'Whakarewarewa Forest, Rotorua',
+  'Rotorua, Nova Zelândia',
+  'Cathedral Cove, Coromandel',
+  'Glen Innes, Nova Zelândia',
+  'Coromandel Peninsula, NZ',
+  'Hot Water Beach, NZ',
+  'Connemara, Irlanda',
+  'Kirkjufell, Islândia',
+];
+const lugares = lugaresCaptions.map((caption, i) => ({
+  src: `/lugares/lugares-${String(i + 1).padStart(2, '0')}.jpeg`,
+  caption,
+}));
 
 const timeline = [
   { year: 'Salvador, BA', title: 'Ilha de Bom Jesus dos Passos', desc: 'Cresceu numa família de marisqueiros e pescadores. O oceano e a geologia costeira como primeiros laboratórios.', delay: 0 },
@@ -114,9 +138,10 @@ const timeline = [
   <section class="gallery-section">
     <div class="section-label">Na natureza <span>lugares que me formaram</span></div>
     <div class="gallery-grid">
-      {lugares.map((src, i) => (
+      {lugares.map((l, i) => (
         <div class="gallery-item reveal" style={i % 4 ? `transition-delay:${(i % 4) * 0.1}s` : undefined}>
-          <img src={src} alt="Lugares que me formaram" loading="lazy" />
+          <img src={l.src} alt={l.caption} loading="lazy" />
+          <div class="gallery-label">{l.caption}</div>
         </div>
       ))}
     </div>
@@ -248,6 +273,20 @@ const timeline = [
     transition: transform 0.4s ease;
   }
   .gallery-item:hover img { transform: scale(1.04); }
+  .gallery-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.6rem 1rem 0.7rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(232, 244, 248, 0.92);
+    background: linear-gradient(to top, rgba(8, 12, 13, 0.85), transparent);
+    z-index: 2;
+    pointer-events: none;
+  }
 
   /* TIMELINE */
   .timeline-section { background: var(--deep-rock); padding: 7rem 3rem; position: relative; z-index: 10; overflow: hidden; }
