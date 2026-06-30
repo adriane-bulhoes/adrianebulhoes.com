@@ -11,32 +11,46 @@ const skills = [
   { icon: '💻', name: 'Desenvolvimento web', desc: 'Pós-graduação Full Stack. Competência técnica aplicada à divulgação e visualização científica.', chips: ['HTML · CSS · JS', 'Full Stack'], delay: 0.25 },
 ];
 
-const lugaresCaptions = [
-  'Reynisfjara, Islândia',
-  'Terras Altas da Islândia',
-  'Cliffs of Moher, Irlanda',
-  'Sólheimajökull, Islândia',
-  'Mýrdalsjökull, Islândia',
-  'Gruta de gelo, Mýrdalsjökull',
-  'Mýrdalsjökull, Islândia',
-  'Mýrdalssandur, Islândia',
-  'Reykjavik, Islândia',
-  'Reynisfjara, Islândia',
-  'Reynisfjara, Islândia',
-  'Whakarewarewa Forest, Rotorua',
-  'Rotorua, Nova Zelândia',
-  'Cathedral Cove, Coromandel',
-  'Glen Innes, Nova Zelândia',
-  'Coromandel Peninsula, NZ',
-  'Hot Water Beach, NZ',
-  'Connemara, Irlanda',
-  'Kirkjufell, Islândia',
-  'Dingle Peninsula, Irlanda',
-  'Onetangi Beach, Waiheke Island',
-];
-const lugares = lugaresCaptions.map((caption, i) => ({
-  src: `/lugares/lugares-${String(i + 1).padStart(2, '0')}.jpeg`,
-  caption,
+const lugaresGroups = [
+  {
+    country: 'Islândia',
+    photos: [
+      { n: 1, caption: 'Reynisfjara' },
+      { n: 4, caption: 'Sólheimajökull' },
+      { n: 2, caption: 'Terras Altas da Islândia' },
+      { n: 7, caption: 'Mýrdalsjökull' },
+      { n: 5, caption: 'Mýrdalsjökull' },
+      { n: 8, caption: 'Mýrdalssandur' },
+      { n: 6, caption: 'Gruta de gelo, Mýrdalsjökull' },
+      { n: 11, caption: 'Reynisfjara' },
+      { n: 9, caption: 'Reykjavik' },
+      { n: 19, caption: 'Kirkjufell' },
+      { n: 10, caption: 'Reynisfjara' },
+    ],
+  },
+  {
+    country: 'Irlanda',
+    photos: [
+      { n: 3, caption: 'Cliffs of Moher' },
+      { n: 20, caption: 'Dingle Peninsula' },
+      { n: 18, caption: 'Connemara' },
+    ],
+  },
+  {
+    country: 'Nova Zelândia',
+    photos: [
+      { n: 14, caption: 'Cathedral Cove, Coromandel' },
+      { n: 12, caption: 'Whakarewarewa Forest, Rotorua' },
+      { n: 13, caption: 'Rotorua' },
+      { n: 16, caption: 'Coromandel Peninsula' },
+      { n: 21, caption: 'Onetangi Beach, Waiheke Island' },
+      { n: 17, caption: 'Hot Water Beach' },
+      { n: 15, caption: 'Glen Innes' },
+    ],
+  },
+].map((g) => ({
+  country: g.country,
+  photos: g.photos.map((p) => ({ src: `/lugares/lugares-${String(p.n).padStart(2, '0')}.jpeg`, caption: p.caption })),
 }));
 
 const timeline = [
@@ -139,14 +153,19 @@ const timeline = [
   <!-- GALERIA -->
   <section class="gallery-section">
     <div class="section-label">Na natureza <span>lugares que me formaram</span></div>
-    <div class="gallery-grid">
-      {lugares.map((l, i) => (
-        <div class="gallery-item reveal" style={i % 4 ? `transition-delay:${(i % 4) * 0.1}s` : undefined}>
-          <img src={l.src} alt={l.caption} loading="lazy" />
-          <div class="gallery-label">{l.caption}</div>
+    {lugaresGroups.map((g) => (
+      <div class="gallery-group">
+        <div class="gallery-country">{g.country}</div>
+        <div class="gallery-grid">
+          {g.photos.map((l, i) => (
+            <div class="gallery-item reveal" style={i % 4 ? `transition-delay:${(i % 4) * 0.1}s` : undefined}>
+              <img src={l.src} alt={l.caption} loading="lazy" />
+              <div class="gallery-label">{l.caption}</div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    ))}
   </section>
 
   <StratumDivider fill="#162020" bg="#111618" />
@@ -255,6 +274,16 @@ const timeline = [
 
   /* GALLERY */
   .gallery-section { background: var(--obsidian); padding: 7rem 3rem; position: relative; z-index: 10; }
+  .gallery-group { margin-top: 3.5rem; }
+  .gallery-group:first-of-type { margin-top: 3rem; }
+  .gallery-country {
+    font-family: var(--ff-serif);
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--glacier-mid);
+    margin-bottom: 1rem;
+  }
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -263,7 +292,6 @@ const timeline = [
     border: 1px solid rgba(200, 232, 240, 0.05);
     border-radius: 3px;
     overflow: hidden;
-    margin-top: 3rem;
   }
   .gallery-item { aspect-ratio: 1 / 1; background: var(--deep-rock); position: relative; overflow: hidden; }
   .gallery-item img {
