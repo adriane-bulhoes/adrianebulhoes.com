@@ -9,13 +9,13 @@ import { z } from 'astro/zod';
  */
 const fieldnotes = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/fieldnotes' }),
-  schema: ({ image }) =>
+  schema: () =>
     z.object({
       title: z.string(),
       date: z.coerce.date(),
       location: z.string(),
       tags: z.array(z.string()).default([]),
-      cover: image().optional(),
+      cover: z.string().optional(),
       excerpt: z.string().optional(),
       draft: z.boolean().default(false),
       lang: z.enum(['pt', 'en']).default('pt'),

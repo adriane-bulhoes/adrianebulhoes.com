@@ -4,6 +4,7 @@ date: 2025-11-08
 location: "Palm Beach, Waiheke Island, NZ"
 tags: ["bioluminescência", "oceano", "Noctiluca"]
 excerpt: "Passava das dez da noite quando soube que o mar estava aceso. Um azul eléctrico vinha de dentro da água, milhões de células que respondem ao toque das ondas transformando o próprio susto em luz."
+cover: "/images/bioluminescencia-waiheke.jpeg"
 ---
 
 Palm Beach, 8 de Novembro. Já passava das dez da noite e eu estava pronta para dormir quando vieram as notificações no Facebook, gente a dizer que o mar estava aceso. Podia ter ficado na cama. Mas há coisas que não voltam se a gente espera o amanhecer, então troquei de roupa e conduzi até à praia no escuro.

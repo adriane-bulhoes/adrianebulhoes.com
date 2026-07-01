@@ -11,7 +11,7 @@ export const getStaticPaths = (async () => {
 
 const { note } = Astro.props;
 const { Content } = await render(note);
-const { title, date, location, tags, excerpt } = note.data;
+const { title, date, location, tags, excerpt, cover } = note.data;
 ---
 
 <BaseLayout title={`${title} — Field Notes`} description={excerpt ?? title}>
@@ -24,6 +24,11 @@ const { title, date, location, tags, excerpt } = note.data;
     <h1 class="article-title">{title}</h1>
     {tags.length > 0 && (
       <div class="article-tags">{tags.map((t) => <span class="article-tag">{t}</span>)}</div>
+    )}
+    {cover && (
+      <div class="article-cover">
+        <img src={cover} alt={title} />
+      </div>
     )}
     <div class="article-body">
       <Content />
@@ -94,6 +99,8 @@ const { title, date, location, tags, excerpt } = note.data;
     padding-left: 1.5rem;
     margin: 2.5rem 0;
   }
+  .article-cover { margin: 2rem 0 2.5rem; border-radius: 3px; overflow: hidden; }
+  .article-cover img { width: 100%; height: 420px; object-fit: cover; object-position: center; display: block; }
   .article-body :global(img) { width: 100%; height: auto; border-radius: 3px; margin: 2rem 0; }
   .article-body :global(ul),
   .article-body :global(ol) { color: #6a9aaa; line-height: 1.9; margin: 0 0 1.5rem 1.2rem; font-weight: 300; }
