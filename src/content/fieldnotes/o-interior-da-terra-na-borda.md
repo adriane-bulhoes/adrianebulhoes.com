@@ -17,9 +17,3 @@ Fiquei parada diante daquilo, com a sensação estranha de estar a olhar o plane
   <img src="/images/champagne-pool-01.jpeg" alt="Champagne Pool, Wai-O-Tapu" />
   <img src="/images/champagne-pool-03.jpeg" alt="Depósitos minerais na borda da Champagne Pool" />
 </div>
-
-<div class="photo-grid photo-grid-3">
-  <img src="/images/rotorua-thermal-01.jpeg" alt="Piscina termal, Rotorua" />
-  <img src="/images/rotorua-thermal-02.jpeg" alt="Piscina termal com fumarola" />
-  <img src="/images/rotorua-thermal-03.jpeg" alt="Película iridescente de enxofre" />
-</div>
