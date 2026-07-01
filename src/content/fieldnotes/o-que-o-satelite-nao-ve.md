@@ -3,6 +3,7 @@ title: "O que o satélite não consegue ver"
 date: 2025-01-15
 location: "Ilha de Bom Jesus dos Passos, BR"
 tags: ["manguezal", "memória", "GEE"]
+cover: "/images/bom-jesus.webp"
 excerpt: "Entre 1990 e 2023, a ilha perdeu cerca de 6 hectares de vegetação densa, quase um quinto do que existia. O número vem do Google Earth Engine. Mas há uma camada da perda que nenhuma imagem de satélite regista."
 ---
 
