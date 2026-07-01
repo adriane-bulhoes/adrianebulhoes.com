@@ -102,6 +102,21 @@ const { title, date, location, tags, excerpt, cover } = note.data;
   .article-cover { margin: 2rem 0 2.5rem; border-radius: 3px; overflow: hidden; }
   .article-cover img { width: 100%; height: 420px; object-fit: cover; object-position: center; display: block; }
   .article-body :global(img) { width: 100%; height: auto; border-radius: 3px; margin: 2rem 0; }
+  .article-body :global(.photo-grid) {
+    display: grid;
+    gap: 4px;
+    margin: 2rem 0;
+  }
+  .article-body :global(.photo-grid img) {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 3px;
+    margin: 0;
+  }
+  .article-body :global(.photo-grid-2) { grid-template-columns: 1fr 1fr; }
+  .article-body :global(.photo-grid-3) { grid-template-columns: 1fr 1fr 1fr; }
   .article-body :global(ul),
   .article-body :global(ol) { color: #6a9aaa; line-height: 1.9; margin: 0 0 1.5rem 1.2rem; font-weight: 300; }
 

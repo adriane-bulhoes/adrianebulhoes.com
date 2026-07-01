@@ -13,12 +13,13 @@ A água ferve a 75°C e ainda assim parece mover-se devagar, como algo vivo. Ess
 
 Fiquei parada diante daquilo, com a sensação estranha de estar a olhar o planeta cru: as camadas profundas da Terra trazidas à superfície, expostas, sem nada por cima. Demorei a perceber que tinha prendido a respiração o tempo todo.
 
-![Champagne Pool, Wai-O-Tapu](/images/champagne-pool-01.jpeg)
+<div class="photo-grid photo-grid-2">
+  <img src="/images/champagne-pool-01.jpeg" alt="Champagne Pool, Wai-O-Tapu" />
+  <img src="/images/champagne-pool-03.jpeg" alt="Depósitos minerais na borda da Champagne Pool" />
+</div>
 
-![Depósitos de arsénio e antimônio na borda da Champagne Pool](/images/champagne-pool-03.jpeg)
-
-![Piscina termal, Rotorua](/images/rotorua-thermal-01.jpeg)
-
-![Piscina termal com fumarola, Rotorua](/images/rotorua-thermal-02.jpeg)
-
-![Película iridescente de enxofre, Wai-O-Tapu](/images/rotorua-thermal-03.jpeg)
+<div class="photo-grid photo-grid-3">
+  <img src="/images/rotorua-thermal-01.jpeg" alt="Piscina termal, Rotorua" />
+  <img src="/images/rotorua-thermal-02.jpeg" alt="Piscina termal com fumarola" />
+  <img src="/images/rotorua-thermal-03.jpeg" alt="Película iridescente de enxofre" />
+</div>
